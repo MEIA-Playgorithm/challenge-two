@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/playgorithm-logo.png" alt="Playgorithm logo" width="200">
+</p>
+
 # challenge-two
 
 We use NBA (National Basketball Association) data to build prediction models and test search algorithms such as A*. This is an academic machine learning project.
@@ -11,6 +15,7 @@ data/archive/             the data, zipped and split into 95 MB parts
 data/unzip.sh, unzip.ps1  scripts that rebuild data/csv/ from data/archive/
 data/csv/<source>/        the data as CSV files (created by the unzip scripts, not stored in git)
 docs/DATA_GUIDE.md        what each data file contains
+docs/assets/              images used in the docs, such as the team logo
 notebooks/                analysis notebooks
 ```
 
