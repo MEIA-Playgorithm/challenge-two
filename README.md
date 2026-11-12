@@ -74,6 +74,6 @@ We converted every source to CSV and removed duplicates without losing data:
 
 ## Branches and commits
 
-- **Branches:** Name each branch `type/task`, for example `docs/catalog-data`, `feature/thing` or `bugfix/thing`. Do not commit directly to `development` or `main`. Read the [branch naming guide](.claude/skills/branch-naming/SKILL.md).
+- **Branches:** `development` is the default branch and holds the latest finished work. `main` holds releases only. Make every change through a pull request: from your work branch into `development`, and from `development` into `main` for a release. Push only to your work branches. Name each work branch `type/task`, for example `docs/catalog-data`, `feature/thing` or `bugfix/thing`. Read the [branch guide](.claude/skills/branch-naming/SKILL.md).
 - **Commits:** Write commit messages in English. Follow the NASA cFS (core Flight System) Git Commit Guidelines and the seven rules by Chris Beams, for example `Fix #12, Add data overview notebook`. Make one commit for each topic. Read the [commit guide](.claude/skills/commit/SKILL.md).
 - **Documentation:** Write README and guide files in plain language, following the NASA writing standards. Read the [documentation guide](.claude/skills/docs-style/SKILL.md).

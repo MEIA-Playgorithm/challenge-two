@@ -14,6 +14,10 @@ description: Steps and message format for making commits in this project (NASA c
 3. **Group the changes by topic.** Look at `git status` and `git diff`, and split the changes into one commit per topic (for example docs, a notebook, the data archive). Stage each group on its own (`git add <files>`), never `git add -A` blindly.
 4. **Check what goes in.** No extracted CSVs (`data/csv/`), no `.venv/`, no files over 100 MB, no credentials or tokens.
 
+## After committing
+
+Push only to work branches (`type/task`), never to `development` or `main`. Changes reach `development` and `main` only through pull requests. The `branch-naming` skill explains the branch workflow.
+
 ## Message format
 
 This project follows NASA's cFS **Git Commit Guidelines**, which build on Chris Beams' **The Seven Rules of a Great Git Commit Message**. Messages are in English.
