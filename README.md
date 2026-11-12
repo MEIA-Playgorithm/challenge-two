@@ -7,12 +7,26 @@ Academic machine learning project on basketball (NBA): prediction models and sea
 ## Structure
 
 ```
-data/csv/<source>/        the data, CSV only, no duplicates (not in git)
+data/archive/             the data, zipped and split into 95 MB parts (in git)
+data/unzip.sh, unzip.ps1  rebuild data/csv/ from data/archive/
+data/csv/<source>/        the data as CSV, no duplicates (not in git, created by unzip)
 docs/DATA_GUIDE.md        what each file contains
 notebooks/                analysis notebooks (01_data_overview: sizes, rows, peeks, missing values, coverage)
 ```
 
-The data itself is not in git (about 9 GB). It comes from the sources below and must be placed in `data/csv/<source>/` locally.
+## Getting the data
+
+The CSVs are about 9 GB, too big for git (GitHub rejects files over 100 MB). They are stored zipped in `data/archive/` (1.8 GB, 19 parts). After cloning, run one of these from the repo root:
+
+```bash
+sh data/unzip.sh
+```
+
+```powershell
+pwsh data/unzip.ps1
+```
+
+This creates `data/csv/`, which git ignores. It takes about 2 minutes.
 
 ## Sources
 
