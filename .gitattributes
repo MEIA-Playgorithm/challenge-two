@@ -1,0 +1,5 @@
+# Shell scripts must keep LF line endings to run on Linux/macOS
+*.sh text eol=lf
+
+# Zip parts are binary: never convert line endings or diff them
+data/archive/* binary
