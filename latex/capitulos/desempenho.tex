@@ -1,0 +1,89 @@
+\chapter{Machine Learning para avaliação de jogadores e alinhamentos}
+\label{chap:desempenho}
+
+O módulo de avaliação de jogadores e alinhamentos de AAUTIA implementa duas tarefas distintas, documentadas em
+\path{docs/PERFORMANCE_EVALUATION.md}: previsão da produção individual
+e avaliação da associação dos cinco iniciais com a margem final do jogo.
+Não são reconstruídos todos os alinhamentos utilizados durante a partida.
+
+\section{Previsão da produção individual}
+
+Cada observação corresponde à participação de um jogador num jogo e
+exige pelo menos cinco participações anteriores na mesma temporada.
+Os alvos são pontos, ressaltos totais e assistências, tratados separadamente
+para evitar impor pesos arbitrários numa única classificação de jogador.
+A previsão é condicional à participação: não estima convocatória,
+disponibilidade ou lesões.
+
+As características incluem jogar em casa, dias de descanso, número de
+participações históricas limitado a dez e médias das últimas cinco e dez
+participações para pontos, ressaltos, assistências, roubos de bola,
+desarmes de lançamento, perdas de bola e tentativas de lançamento de campo.
+O histórico acompanha o jogador nas mudanças de equipa dentro da mesma
+temporada e reinicia na época seguinte. Os minutos não são usados, pois
+a codificação desse campo na fonte necessita de validação adicional.
+Resumos de carreira e estatísticas da partida prevista também são excluídos.
+
+São comparadas regressão Ridge, Random Forest e média das últimas dez
+participações. A seleção minimiza a média dos erros absolutos médios
+(MAE) dos três alvos na validação. Esta média usa as unidades originais,
+pelo que os pontos podem ter maior influência no critério. A referência
+histórica pode ser selecionada caso supere os modelos aprendidos.
+A imputação e a normalização aplicável são ajustadas dentro do processo
+de treino, seguindo o protocolo temporal comum.
+
+O resumo por jogador apresenta produção observada e resíduos, incluindo
+pontos observados menos previstos. Um resíduo positivo indica produção
+superior à expectativa do modelo, sem demonstrar qualidade intrínseca ou
+contributo causal para a vitória. A comparação agregada dispõe de uma
+marca de elegibilidade para jogadores com pelo menos 20 participações
+avaliadas. A exclusão do início de época e de jogadores com pouco histórico
+limita a representatividade.
+
+\section{Avaliação dos cinco iniciais}
+
+Uma partida só é aceite quando existem exatamente cinco titulares distintos
+por equipa, sem jogadores partilhados entre os dois lados. Os jogos com
+registos inválidos ou incompletos são excluídos e identificados num ficheiro
+próprio. Existe uma lacuna importante nos titulares de 2021--22, comum às
+fontes individuais básica e estendida.
+
+O alvo é a margem final de pontos da equipa da casa. A representação
+aditiva atribui \(+1\) a cada titular da casa e \(-1\) a cada titular
+visitante, originando o modelo
+\[
+\widehat{d}_g=b+\sum_{i\in H_g}\beta_i-\sum_{i\in A_g}\beta_i,
+\]
+em que \(H_g\) e \(A_g\) são os cinco iniciais e \(b\) representa a vantagem
+de casa ajustada. Uma segunda representação acrescenta indicadores das
+combinações completas de cinco jogadores. A regressão Ridge regulariza
+os coeficientes de jogadores e combinações pouco observados.
+
+A representação e a regularização são selecionadas pelo menor RMSE na
+validação, incluindo a margem média em casa como referência elegível.
+Jogadores ou combinações desconhecidos recebem contribuição aprendida
+nula, sendo contabilizados nos resultados. O resumo de cada quinteto soma
+os coeficientes aplicáveis sem o intercepto e apresenta também a margem
+final observada nos jogos em que esse quinteto iniciou a partida.
+A marca de elegibilidade exige pelo menos dez jogos de teste como titular
+para a combinação.
+
+Estes coeficientes são associações com o resultado do jogo completo,
+não avaliações por posse ou estimativas de desempenho conjunto durante
+o tempo efetivamente passado em campo. Banco, adversários e decisões do
+treinador influenciam a margem. Os titulares são conhecidos retrospetivamente,
+sem verificação da sua disponibilidade antes do início do jogo.
+
+\section{Interfaces para o planeamento}
+
+O procedimento \path{scripts/train_performance.py} guarda modelos,
+metadados, previsões, coeficientes, cobertura e exclusões. O comando
+\path{scripts/evaluate_lineup.py} aceita cinco identificadores por lado
+e devolve a margem esperada do jogo e os jogadores desconhecidos; não
+valida a pertença ao plantel nem fornece uma probabilidade de vitória.
+
+O módulo de planeamento de rotações reutiliza as previsões individuais e os coeficientes aditivos
+dos titulares. A implementação rejeita modelos com interações de quintetos
+em vez de omitir esses termos. A passagem das previsões para uma utilidade
+de minutos é uma hipótese do planeamento, descrita no capítulo seguinte,
+e não uma propriedade aprendida pelo modelo de produção.

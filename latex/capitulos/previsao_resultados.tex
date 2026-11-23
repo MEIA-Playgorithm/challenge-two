@@ -1,0 +1,83 @@
+\chapter{Machine Learning para previsão de resultados}
+\label{chap:previsao-resultados}
+
+Este capítulo corresponde ao módulo de previsão de resultados de AAUTIA e segue o guia
+\path{docs/RESULT_PREDICTION.md}. O objetivo é estimar, antes do início
+do jogo, a probabilidade de vitória da equipa da casa. A unidade de
+observação é uma partida e o alvo binário indica se a equipa da casa venceu.
+
+\section{Características e informação disponível}
+
+O procedimento utiliza as tabelas de jogos e de estatísticas por equipa
+preparadas pelo módulo de preparação de dados. Constrói 46 características, das quais 39 são
+diferenças entre médias da equipa da casa e da visitante. Para cada uma
+de 13 medidas, calcula médias dos últimos cinco jogos, dos últimos dez
+e da temporada em curso. As medidas são vitórias, pontos marcados e
+sofridos, margem de pontos, assistências, ressaltos, perdas de bola,
+percentagens de lançamentos de campo, triplos e lances livres,
+percentagem efetiva de lançamento e eficiências ofensiva e defensiva.
+
+A estimativa de posses de uma equipa é
+\[
+\widehat{P}=FGA+0{,}44\,FTA-ORB+TOV,
+\]
+onde \(FGA\) e \(FTA\) são tentativas de lançamentos de campo e lances
+livres, \(ORB\) são ressaltos ofensivos e \(TOV\) são perdas de bola.
+A média das estimativas das duas equipas define as posses do jogo.
+As eficiências correspondem aos pontos marcados ou sofridos por 100
+posses estimadas; não são as métricas avançadas oficiais do fornecedor.
+
+As sete características restantes descrevem jogos disputados na época,
+dias desde o último jogo, encontros em dias consecutivos e diferença
+entre classificações Elo. O descanso é limitado a 14 dias. As médias
+reiniciam em cada temporada; o Elo conserva 75\% do afastamento em relação
+a 1\,500. A inicialização é 1\,500, com \(K=20\) e vantagem de casa de 65
+pontos Elo, parâmetros fixados antes da avaliação.
+
+Os resultados do próprio jogo, identificadores, datas e rótulos das
+divisões não entram no modelo. A ausência de histórico permanece como
+valor em falta até ao pré-processamento. Este ajusta imputação pela
+mediana e indicadores de ausência nos dados de treino, acrescentando
+normalização no caso da regressão logística.
+
+\section{Modelos e seleção}
+
+São comparadas três configurações de regressão logística,
+\(C\in\{0{,}1;1;10\}\), uma Random Forest com 300 árvores, profundidade
+máxima 10 e pelo menos 15 observações por folha, e duas configurações de
+\emph{histogram gradient boosting}, com profundidade 3, 200 iterações e
+penalização L2 de 1 ou 10. As referências fixas são a frequência histórica
+de vitórias em casa e a probabilidade Elo.
+
+O critério de seleção é a menor perda logarítmica na validação:
+\[
+\mathcal{L}=-\frac{1}{N}\sum_{g=1}^{N}
+\left[y_g\log p_g+(1-y_g)\log(1-p_g)\right].
+\]
+Este critério avalia a qualidade das probabilidades utilizadas pelo
+sistema. A exatidão usa o limiar de 0,5; o Brier score mede o erro
+quadrático das probabilidades e a ROC-AUC avalia discriminação. Curvas
+de calibração e ROC complementam as métricas.
+
+A importância por permutação é calculada na validação, antes do reajuste
+final, medindo o aumento de perda após baralhar cada variável.
+Características correlacionadas podem partilhar importância; os valores
+não representam efeitos causais.
+
+\section{Execução, saídas e limites}
+
+O comando \path{scripts/train_results.py} produz as características,
+o dicionário, o modelo guardado, as métricas, previsões de teste e figuras.
+O comando \path{scripts/predict_game.py} reutiliza a mesma construção
+histórica e rejeita datas dentro do período de treino, equipas desconhecidas
+ou identificadores iguais para as duas equipas. Os testes documentados
+cobrem alterações de resultados atuais e futuros, exclusão de jogos do
+mesmo dia, reinício de temporada e reprodução das probabilidades pelo
+modelo guardado.
+
+O modelo não inclui lesões, por falta de validação dos fusos horários dos
+relatórios, nem representa explicitamente transferências, cinco inicial
+esperado ou recintos neutros. As lacunas das fontes e a bolha de 2019--20
+limitam a interpretação da vantagem de casa. Os resultados do
+Capítulo~\ref{chap:experiencias} descrevem previsões diárias retrospetivas
+numa temporada de teste.

@@ -1,0 +1,88 @@
+\documentclass[10pt,a4paper]{report}
+
+% Configuração do idioma e codificação
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newunicodechar}
+\newunicodechar{–}{\textendash}
+\usepackage[portuguese]{babel}
+
+% Margens e formatação
+\usepackage[a4paper,margin=1.7cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{xurl}
+\usepackage{microtype}
+% Títulos compactos: capítulos 12 pt, secções 11 pt e subsecções 10 pt.
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\large\bfseries}
+  {\normalsize\chaptertitlename\ \thechapter}{5pt}{\large}
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\large\bfseries}{}{0pt}{\large}
+\titlespacing*{\chapter}{0pt}{8pt}{12pt}
+\titleformat{\section}
+  {\normalfont\fontsize{11}{13}\selectfont\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{10pt plus 2pt minus 2pt}{5pt}
+\titlespacing*{\subsection}{0pt}{8pt plus 2pt minus 2pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{6pt plus 2pt minus 2pt}{3pt}
+\usepackage{hyperref}
+\graphicspath{{imagens/}}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% Espaço adicional para a composição de linhas com títulos e URLs longos.
+\setlength{\emergencystretch}{3em}
+\usepackage{setspace}
+
+\onehalfspacing
+\setlength{\columnsep}{0.8cm}
+
+% Informações do documento
+\title{Sistema Inteligente de Apoio à Decisão
+de Treinadores de Basquetebol}
+
+\author{Relatório de AAUTIA e PLANTIA}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este trabalho investiga a integração de técnicas
+de Machine Learning e Planeamento Automático
+no apoio à decisão de treinadores de basquetebol.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% Conteúdo dos capítulos em duas colunas.
+% \twocolumn
+\input{capitulos/introducao}
+
+\chapter{Estado da Arte}
+\label{chap:estado-arte}
+\input{capitulos/estado_arte_aautia}
+\input{capitulos/estado_arte_plantia}
+
+\input{capitulos/data}
+\input{capitulos/metodologia}
+\input{capitulos/experiencias}
+\input{capitulos/conclusoes}
+
+\onecolumn
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliographystyle{plain}
+\bibliography{referencias}
+
+\end{document}

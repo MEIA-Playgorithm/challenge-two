@@ -1,0 +1,78 @@
+\documentclass[10pt,a4paper]{report}
+
+% Configuração do idioma e codificação
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newunicodechar}
+\newunicodechar{–}{\textendash}
+\usepackage[portuguese]{babel}
+
+% Margens e formatação
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{xurl}
+\usepackage{microtype}
+% Títulos de capítulos mais compactos.
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries}
+  {\normalsize\chaptertitlename\ \thechapter}{8pt}{\Large}
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\Large\bfseries}{}{0pt}{\Large}
+\titlespacing*{\chapter}{0pt}{12pt}{20pt}
+\usepackage{hyperref}
+\graphicspath{{imagens/}}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% Espaço adicional para a composição de linhas com títulos e URLs longos.
+\setlength{\emergencystretch}{3em}
+\usepackage{setspace}
+
+\onehalfspacing
+\setlength{\columnsep}{0.8cm}
+
+% Informações do documento
+\title{Sistema Inteligente de Apoio à Decisão
+de Treinadores de Basquetebol}
+
+\author{Relatório de AAUTIA e PLANTIA}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este trabalho investiga a integração de técnicas
+de Machine Learning e Planeamento Automático
+no apoio à decisão de treinadores de basquetebol.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% Conteúdo dos capítulos em duas colunas.
+\twocolumn
+\input{capitulos/introducao}
+
+\chapter{Estado da Arte}
+\label{chap:estado-arte}
+\input{capitulos/estado_arte_aautia}
+\input{capitulos/estado_arte_plantia}
+
+\input{capitulos/metodologia}
+\input{capitulos/experiencias}
+\input{capitulos/conclusoes}
+
+\onecolumn
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliographystyle{plain}
+\bibliography{referencias}
+
+\end{document}

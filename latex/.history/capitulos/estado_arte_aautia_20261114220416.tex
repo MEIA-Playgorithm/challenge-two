@@ -1,0 +1,226 @@
+% Convertido de estado_da_arte.md.
+AAUTIA --- Aprendizagem Automática \textbar{} PLANTIA --- Planeamento em
+Inteligência Artificial
+
+\textbf{Tema do projeto:} \emph{Sistema Inteligente de Apoio à Decisão
+de Treinadores de Basquetebol através de Machine Learning e Planeamento
+Automático.}
+
+Esta primeira versão do estado da arte apresenta \textbf{trabalhos científicos reais, publicados e com referências verificáveis}, sobre previsão de resultados, avaliação de jogadores, composição de equipas, substituições, otimização e planeamento de estratégias.
+
+A investigação foi organizada em duas partes, seguindo a divisão das unidades curriculares:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{AAUTIA (50\%)} --- modelos preditivos, aprendizagem   supervisionada, avaliação de desempenho e previsão de resultados.
+\item
+  \textbf{PLANTIA (50\%)} --- escolha de alinhamentos, substituições,   otimização de decisões, processos de Markov e planeamento sob   incerteza.
+\end{itemize}
+
+Os trabalhos foram identificados através de editoras científicas, revistas académicas, repositórios universitários e publicações com DOI. 
+A apresentação é feita em português, mantendo os títulos originais para facilitar a localização.
+
+\section{Estado da arte de AAUTIA}\label{aautia:estado-da-arte-de-aautia}
+
+\subsection{Previsão de resultados no basquetebol
+europeu}\label{aautia:previsuxe3o-de-resultados-no-basquetebol-europeu}
+
+Lampis, T., Ntzoufras, I., Vassalos, V. e Dimitriou, S. (2023)
+\cite{lampis2023}
+
+\textbf{Artigo:} \emph{Predictions of European Basketball Match Results with Machine Learning Algorithms}
+
+\textbf{Publicação:} Journal of Sports Analytics.
+
+\href{https://doi.org/10.3233/JSA-220639}{Consultar artigo científico --- DOI}
+
+\subsubsection{Objetivo e metodologia}\label{aautia:objetivo-e-metodologia}
+
+Este trabalho investiga a previsão de resultados de jogos de basquetebol em quatro competições europeias: EuroLeague, EuroCup, Liga Grega e Liga Espanhola ACB.
+
+Os investigadores utilizaram \textbf{5 214 jogos realizados entre 2013 e 2018}, construindo indicadores a partir das estatísticas históricas das equipas.
+
+Foram comparados vários modelos, nomeadamente:
+
+\begin{itemize}
+\tightlist
+\item
+  Regressão Logística;
+\item
+  Random Forest;
+\item
+  XGBoost;
+\item
+  Combinações de modelos (\emph{ensemble learning}).
+\end{itemize}
+
+O estudo utilizou ainda sistemas de classificação de equipas, como Elo, PageRank e \emph{pi-rating}, e indicadores de desempenho para enriquecer os dados de entrada.
+
+\subsubsection{Resultados obtidos}\label{aautia:resultados-obtidos}
+
+Os modelos com indicadores adicionais superaram os modelos de referência mais simples em aproximadamente 3 a 5 pontos percentuais de exatidão.
+
+Não foi identificado um algoritmo universalmente superior. O desempenho dependeu da competição e das características dos dados.
+
+Os autores também verificaram a importância dos indicadores de forma recente e dos sistemas de classificação na previsão dos resultados.
+
+\subsubsection{Relevância para AAUTIA}\label{aautia:relevuxe2ncia-para-aautia}
+
+Este é um dos trabalhos mais importantes para o nosso projeto porque fornece uma metodologia diretamente reproduzível: construir características históricas, comparar algoritmos e avaliar previsões com métricas como \emph{accuracy}, \emph{F1-score} e \emph{Brier score}.
+
+\textbf{Aplicação proposta:} utilizar Regressão Logística, Random Forest e XGBoost para prever vitórias, comparando modelos baseados apenas em resultados com outros que incluam estatísticas das equipas e indicadores individuais.
+
+\subsection{Integração de XGBoost e IA explicável na previsão de resultados da NBA}\label{aautia:integrauxe7uxe3o-de-xgboost-e-ia-explicuxe1vel-na-previsuxe3o-de-resultados-da-nba}
+
+Ouyang, Y., Li, X., Zhou, W., Hong, W., Zheng, W., Qi, F. e Peng, L. (2024) \cite{ouyang2024}
+
+\textbf{Artigo:} \emph{Integration of Machine Learning XGBoost and SHAP Models for NBA Game Outcome Prediction and Quantitative Analysis Methodology}
+
+\textbf{Publicação:} PLOS ONE, 19(7), e0307478.
+
+\href{https://doi.org/10.1371/journal.pone.0307478}{Consultar artigo completo --- acesso aberto}
+
+\subsubsection{Objetivo e metodologia}\label{aautia:objetivo-e-metodologia-1}
+
+Os autores desenvolveram um sistema de previsão de resultados da NBA utilizando dados das temporadas de 2021 a 2023.
+
+O trabalho combina duas tecnologias:
+
+\textbf{XGBoost:} algoritmo de aprendizagem supervisionada baseado em conjuntos de árvores de decisão, utilizado para prever resultados.
+
+\textbf{SHAP:} técnica de explicabilidade que permite estimar a contribuição das diferentes variáveis para as previsões realizadas pelo modelo.
+
+O sistema analisa indicadores de desempenho e permite atualizar as previsões em diferentes momentos de uma partida.
+
+\subsubsection{Resultados e conclusões}\label{aautia:resultados-e-conclusuxf5es}
+
+O estudo demonstra uma abordagem para prever resultados e identificar quais os indicadores estatísticos que mais influenciam as previsões.
+
+A integração de SHAP permite interpretar os modelos, em vez de apresentar apenas uma probabilidade de vitória.
+
+Os autores disponibilizaram também o código utilizado na investigação.
+
+\href{https://github.com/YanOuyang514/NBA-game-outcome-prediction-and-quantitative-analysis-methodology}{Código do trabalho no GitHub}
+
+\subsubsection{Relevância para AAUTIA}\label{aautia:relevuxe2ncia-para-aautia-1}
+
+Este artigo é especialmente útil porque o nosso projeto não deve limitar-se a informar o treinador de que existe determinada probabilidade de vitória.
+
+Deve explicar \textbf{quais os fatores que contribuem para essa previsão}.
+
+Por exemplo, o sistema poderá indicar que uma previsão foi influenciada pelo desempenho defensivo recente, pela eficiência dos lançamentos e pelo rendimento histórico de determinados alinhamentos.
+
+Importa distinguir estas explicações estatísticas de afirmações causais sobre o que acontecerá se o treinador alterar uma decisão.
+
+\subsection{Previsão dos resultados da NBA com Machine Learning}\label{aautia:previsuxe3o-dos-resultados-da-nba-com-machine-learning}
+
+Horvat, T., Job, J., Logozar, R. e Livada, Č. (2023) \cite{horvat2023}
+
+\textbf{Artigo:} \emph{A Data-Driven Machine Learning Algorithm for Predicting the Outcomes of NBA Games}
+
+\textbf{Publicação:} Symmetry, 15(4), 798.
+
+\href{https://doi.org/10.3390/sym15040798}{Consultar artigo científico}
+
+\subsubsection{Objetivo e metodologia}\label{aautia:objetivo-e-metodologia-2}
+
+Este trabalho propõe um modelo baseado em dados para prever resultados de jogos da NBA.
+
+Os autores dão particular importância à construção de indicadores estatísticos, procurando transformar os dados disponíveis em variáveis com capacidade preditiva.
+
+O estudo estabelece uma formulação matemática para as estatísticas de basquetebol e para os indicadores derivados, utilizando-os na construção de modelos de aprendizagem automática.
+
+\subsubsection{Contributos}\label{aautia:contributos}
+
+Um dos aspetos relevantes é a preocupação com a definição rigorosa das variáveis utilizadas nos modelos.
+
+A qualidade das características extraídas dos dados é determinante para a capacidade de generalização das previsões.
+
+Este trabalho reforça a importância de construir uma base de dados coerente antes de escolher algoritmos mais complexos.
+
+\subsubsection{Relevância para AAUTIA}\label{aautia:relevuxe2ncia-para-aautia-2}
+
+No nosso projeto, poderá servir de referência para construir indicadores como:
+
+\begin{itemize}
+\tightlist
+\item
+  eficiência ofensiva e defensiva;
+\item
+  média de pontos nos últimos jogos;
+\item
+  aproveitamento dos lançamentos;
+\item
+  ressaltos ofensivos e defensivos;
+\item
+  assistências e perdas de bola.
+\end{itemize}
+
+Estes indicadores devem ser calculados apenas com informação disponível antes de cada partida, evitando a utilização inadvertida de dados futuros.
+
+\subsection{Previsão de resultados durante o decorrer do jogo}\label{aautia:previsuxe3o-de-resultados-durante-o-decorrer-do-jogo}
+
+Kandhway, K. (2025) \cite{kandhway2025}
+
+\textbf{Artigo:} \emph{In-Play Outcome Prediction of an Ongoing Basketball Game Using Machine Learning}
+
+\textbf{Publicação:} Journal of Prediction Markets, 18(2).
+
+\href{https://doi.org/10.5750/jpm.v18i2.2155}{Consultar o artigo científico}
+
+\subsubsection{Objetivo e metodologia}\label{aautia:objetivo-e-metodologia-3}
+
+Este trabalho investiga a previsão do vencedor de um jogo de basquetebol \textbf{enquanto a partida está a decorrer}.
+
+Ao contrário dos modelos pré-jogo, o sistema atualiza as previsões com base na evolução da partida.
+
+Foram utilizados dados da NBA correspondentes a oito temporadas, de 2015/2016 a 2022/2023.
+
+O estudo integra técnicas de aprendizagem supervisionada e utiliza SHAP (SHapley Additive exPlanations) para interpretar a importância das diferentes variáveis.
+
+\subsubsection{Resultados obtidos}\label{aautia:resultados-obtidos-1}
+
+Os autores reportam uma exatidão global de aproximadamente \textbf{74\%}, com resultados que variam entre cerca de 63\% e 90\% em diferentes estados do jogo.
+
+Os resultados mostram também que a importância das variáveis se altera ao longo da partida.
+
+\subsubsection{Relevância para AAUTIA}\label{aautia:relevuxe2ncia-para-aautia-3}
+
+Este trabalho fundamenta uma evolução do nosso sistema para decisões em tempo real.
+
+Por exemplo, o treinador poderia receber uma previsão atualizada após o terceiro período, considerando a diferença pontual, o tempo restante e as estatísticas acumuladas.
+
+Numa primeira fase, considero preferível manter a previsão pré-jogo; a previsão dinâmica poderá constituir uma experiência complementar.
+
+\subsection{Revisão sistemática de aplicações de IA à previsão de basquetebol}\label{aautia:revisuxe3o-sistemuxe1tica-de-aplicauxe7uxf5es-de-ia-uxe0-previsuxe3o-de-basquetebol}
+
+Li, C., Zhang, H., Zhang, Y., Shen, J. e An, R. (2025) \cite{li2025}
+
+\textbf{Artigo:} \emph{The Application of Artificial Intelligence Techniques in Predicting Game Outcomes of Professional Basketball League: A Systematic Review}
+
+\textbf{Publicação:} PLOS ONE, 20(6), e0326326.
+
+\href{https://doi.org/10.1371/journal.pone.0326326}{Consultar revisão sistemática completa}
+
+\subsubsection{Objetivo e metodologia}\label{aautia:objetivo-e-metodologia-4}
+
+Esta revisão analisa a aplicação de métodos de Inteligência Artificial à previsão de resultados em ligas profissionais de basquetebol.
+
+Foram incluídos \textbf{34 estudos científicos}, com uma janela de pesquisa centrada em trabalhos publicados entre 2019 e 2024.
+
+A revisão compara diferentes abordagens, incluindo redes neuronais, Random Forest e modelos combinados.
+
+\subsubsection{Conclusões}\label{aautia:conclusuxf5es}
+
+Os autores identificam resultados promissores para diferentes algoritmos e salientam a importância da seleção de características e da preparação dos dados.
+
+Recomendam também melhorias na validação dos modelos, maior diversidade de competições analisadas e investigação sobre previsão dinâmica e transferência de aprendizagem.
+
+Alguns trabalhos analisados reportam valores de exatidão muito elevados. Porém, esses resultados não devem ser entendidos como desempenhos garantidos ou diretamente comparáveis, porque os conjuntos de dados, as variáveis e os procedimentos de validação diferem.
+
+\subsubsection{Relevância para AAUTIA}\label{aautia:relevuxe2ncia-para-aautia-4}
+
+Este será um artigo central da introdução e do enquadramento científico.
+
+Permite justificar a seleção dos algoritmos, identificar abordagens já exploradas e estabelecer critérios de avaliação para o trabalho experimental.

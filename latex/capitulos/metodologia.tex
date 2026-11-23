@@ -1,0 +1,91 @@
+\chapter{Metodologia e integração das componentes}
+\label{chap:metodologia}
+
+O protótipo Basketball AI Coach articula preparação de dados, aprendizagem
+automática e planeamento. A descrição dos capítulos seguintes baseia-se nos
+guias técnicos de \path{challenge-two/docs} e nos relatórios de experiências
+conservados em \path{challenge-two/reports}. Os resultados apresentados
+são os registados nesses artefactos; a elaboração deste relatório não
+constitui uma nova execução das experiências.
+
+\section{Organização do trabalho}
+
+A divisão pelos seis elementos mantém três componentes em AAUTIA e três
+em PLANTIA. O módulo de preparação de dados prepara os dados comuns, conforme o
+Capítulo~\ref{chap:data}. O módulo de previsão de resultados prevê resultados de jogos
+(Capítulo~\ref{chap:previsao-resultados}) e o módulo de avaliação de jogadores e alinhamentos avalia a produção
+individual e as associações dos cinco iniciais com os resultados
+(Capítulo~\ref{chap:desempenho}). Em PLANTIA, o módulo de planeamento de rotações seleciona o cinco
+inicial e distribui minutos por programação por restrições
+(Capítulo~\ref{chap:rotacoes}); o módulo de planeamento de substituições planeia substituições através
+de um processo de decisão de Markov, comparando programação dinâmica e
+algoritmo genético (Capítulo~\ref{chap:substituicoes}); e
+o módulo de planeamento de vários jogos integra os módulos num horizonte de vários jogos
+(Capítulo~\ref{chap:horizonte}). Cada componente abrange desenvolvimento,
+testes, experiências e documentação.
+
+\section{Questões de investigação e âmbito}
+
+As experiências procuram responder às seguintes questões:
+\begin{enumerate}
+\item Qual dos modelos de classificação produz melhores probabilidades
+ de vitória, face à frequência histórica de vitórias em casa e ao Elo?
+\item Os modelos de regressão melhoram a previsão da produção individual
+ e da margem final associada aos cinco iniciais, face a referências simples?
+\item É possível transformar as estimativas disponíveis numa rotação
+ completa que respeite posições, disponibilidade, minutos e descanso?
+\item Como se compara uma política genética com a solução exata do MDP,
+ e em que cenários estas políticas melhoram a utilidade simulada face
+ à ordem fixa e a uma política gulosa?
+\item Como compatibilizar planos de vários jogos com limites acumulados
+ de minutos e quantificar a probabilidade de atingir um objetivo de vitórias?
+\end{enumerate}
+
+O âmbito implementado distingue três quantidades: probabilidades de
+vitória, previsões estatísticas de produção e utilidades de planeamento.
+Não existe uma relação causal estimada que converta uma alteração de
+minutos ou uma substituição numa nova probabilidade de vitória. Assim,
+a integração permite gerar planos e avaliar objetivos sob hipóteses
+explícitas, mas não demonstra que esses planos aumentem as vitórias reais.
+
+\section{Protocolo temporal comum}
+
+A preparação documentada abrange 8\,283 jogos da fase regular da NBA, das
+temporadas de 2019--20 a 2025--26. O treino utiliza 2019--20 a 2023--24,
+a validação utiliza 2024--25 e o teste utiliza 2025--26. A cobertura é a
+observada nas fontes, não uma certificação de completude do calendário.
+Os subconjuntos efetivos diferem entre tarefas devido aos requisitos de
+histórico individual e à qualidade dos registos de titulares.
+
+As características históricas de cada dia são calculadas antes de
+incorporar qualquer resultado desse dia. Imputação, normalização e modelos
+são ajustados nos dados de treino; a seleção de configurações usa apenas
+a validação. O modelo selecionado é reajustado com treino e validação,
+permanecendo fixo durante o teste. Na avaliação diária, os históricos
+podem incorporar jogos de dias de teste já concluídos.
+
+O planeamento de vários jogos utiliza outro protocolo: congela as
+observações antes de uma única data de corte para todo o horizonte.
+Resultados intermédios ainda desconhecidos não são introduzidos no
+histórico. Esta diferença é necessária para distinguir previsões diárias
+de um plano elaborado antecipadamente para vários encontros.
+
+\section{Interfaces, verificação e reprodutibilidade}
+
+As tabelas preparadas ligam jogos, equipas e jogadores por identificadores
+comuns. Os modelos guardam o pré-processamento e a informação necessária
+à reprodução das previsões. Os planeadores verificam datas de treino,
+compatibilidade das características e, nos modelos de desempenho,
+as impressões digitais dos dados de entrada.
+
+A sequência de execução é preparação, treino dos módulos de previsão de resultados e de avaliação de jogadores e alinhamentos e
+planeamento. O módulo de planeamento de rotações consome os modelos do módulo de avaliação de jogadores e alinhamentos; o módulo de planeamento de substituições
+consome a rotação do módulo de planeamento de rotações. O módulo de planeamento de vários jogos reutiliza diretamente as
+funções de previsão, otimização e MDP, sem exigir relatórios autónomos dos
+módulos de planeamento de rotações e de substituições e sem voltar a treinar os modelos durante o planeamento.
+
+Os guias documentam testes de exclusão de informação futura, validação
+das soluções e consistência da integração. As configurações, métricas,
+identificadores e hashes permitem relacionar cada resultado com as suas
+entradas. O marcador \texttt{\_SUCCESS} identifica execuções concluídas;
+um diretório com ficheiros parciais não constitui uma experiência válida.

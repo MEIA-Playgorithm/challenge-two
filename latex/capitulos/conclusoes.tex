@@ -1,0 +1,55 @@
+\chapter{Conclusões}
+\label{chap:conclusoes}
+
+O trabalho concretiza um protótipo que liga preparação de dados, previsão
+de resultados, avaliação estatística de jogadores e cinco iniciais,
+planeamento de rotações, substituições e objetivos de vários jogos.
+A divisão pelos seis elementos articula as três componentes de AAUTIA
+com as três componentes de PLANTIA através de dados, modelos e verificações
+comuns.
+
+\section{Principais resultados}
+
+Na previsão de resultados, a regressão logística selecionada atingiu
+67,2\% de exatidão e perda logarítmica de 0,603 no teste. Superou a
+frequência histórica de vitória em casa e apresentou qualidade
+probabilística ligeiramente superior ao Elo, embora este tenha obtido
+maior exatidão. A avaliação individual por Ridge melhorou pouco o MAE
+face à média histórica. Para os cinco iniciais, o RMSE de 15,503 pontos
+foi inferior aos 16,407 da referência, mantendo uma capacidade explicativa
+limitada e uma interpretação associativa.
+
+A programação por restrições produziu uma rotação de 240 minutos-jogador
+com verificação independente e prova de optimalidade para a formulação
+do cenário. O MDP preservou os orçamentos de minutos, mas não melhorou a
+utilidade das políticas fixa e gulosa no exemplo avaliado. Este resultado
+não sustenta uma vantagem empírica da adaptação nesse cenário.
+O algoritmo genético, aplicado às políticas do mesmo MDP, igualou a solução
+exata nas cinco execuções. Na sensibilidade sem penalização de fadiga,
+ambos superaram ligeiramente as políticas fixa e gulosa. Contudo, o espaço
+de apenas oito cromossomas não permite concluir superioridade ou melhor
+escalabilidade da pesquisa genética.
+
+A integração selecionou rotações para três jogos sob limites acumulados
+e reportou 77,1\% de probabilidade de atingir duas vitórias, assumindo
+independência. Essa probabilidade pertence ao modelo de resultados;
+não representa um ganho provocado pelo plano. A principal realização da
+integração é compatibilizar previsões, restrições e políticas sequenciais
+num procedimento reproduzível.
+
+\section{Limitações e trabalho futuro}
+
+As fontes e os modelos não fornecem uma avaliação causal de jogadores ou
+decisões. Disponibilidade, posições, calendário histórico e minutos da
+fonte exigem validação adicional. Os cinco iniciais não substituem a
+reconstrução dos intervalos efetivos em campo. A fadiga, os contextos e
+os pesos de utilidade permanecem hipóteses de modelação.
+
+Os próximos passos incluem validar a codificação dos minutos e os horários
+dos relatórios de lesões, reconstruir alinhamentos com atribuição fiável
+de tempo e pontos e repetir a avaliação em diferentes temporadas.
+No planeamento, importa estudar cenários com maior liberdade de ação,
+calendários consecutivos e indisponibilidades, quantificar sensibilidade
+às previsões e calibrar transições com dados adequados. Só uma avaliação
+adicional poderá sustentar afirmações sobre melhoria de decisões ou de
+resultados desportivos.

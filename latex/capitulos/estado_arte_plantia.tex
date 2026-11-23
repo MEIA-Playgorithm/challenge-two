@@ -1,0 +1,172 @@
+\section{Avaliação e seleção de alinhamentos}
+\label{sec:avaliacao-alinhamentos}
+
+A previsão do resultado de uma equipa não fornece necessariamente uma
+estimativa do desempenho de cada combinação de cinco jogadores.
+Para apoiar a seleção de alinhamentos, é necessário distinguir duas
+tarefas: estimar o valor das combinações e escolher uma combinação
+admissível segundo os objetivos e as restrições. Os trabalhos de
+Grassetti et al.~\cite{grassetti2021} e Kolias et al.~\cite{kolias2022}
+contribuem sobretudo para a avaliação, enquanto Rodríguez Aguilar et
+al.~\cite{rodriguez2020} exploram a otimização da seleção.
+
+Grassetti et al.~\cite{grassetti2021} utilizam dados \emph{play-by-play}
+de 240 partidas da EuroLeague 2018/2019 para desenvolver uma extensão
+do \emph{Regularized Adjusted Plus-Minus}. A abordagem emprega
+regularização Bayesiana e distribuições posteriores para analisar
+contribuições individuais e coletivas e ordenar jogadores e
+alinhamentos. Este enquadramento permite considerar o desempenho
+conjunto, em vez de selecionar simplesmente os cinco jogadores com
+melhores estatísticas individuais.
+
+Kolias et al.~\cite{kolias2022} estudam a eficiência ofensiva e defensiva
+de formações da Liga Grega, analisando 1\,131 fases de posse de bola
+através de modelação estatística de Markov. A distinção entre as duas
+dimensões de eficiência é relevante porque a preferência por um
+alinhamento depende do objetivo: recuperar uma desvantagem pode exigir
+uma escolha diferente da necessária para proteger uma vantagem.
+Os dois estudos fornecem, assim, formas de caracterizar alternativas,
+mas essa avaliação não equivale, por si só, a um algoritmo que escolha
+a sequência de substituições futuras.
+
+Rodríguez Aguilar et al.~\cite{rodriguez2020} apresentam um modelo
+híbrido que combina otimização e avaliação de eficiência técnica na
+seleção de alinhamentos da NBA. Segundo o resumo publicado, as
+combinações selecionadas apresentaram maior eficiência técnica na
+avaliação efetuada. Este resultado sustenta o interesse da programação
+matemática para a composição da equipa; não estabelece automaticamente
+um aumento da probabilidade de vitória nem resolve a gestão de minutos
+ao longo de várias partidas.
+
+A articulação destes trabalhos sugere uma interface entre os módulos
+do projeto: a componente estatística estima o desempenho das alternativas
+e a componente de otimização escolhe entre as alternativas admissíveis.
+A qualidade da decisão depende de ambas. Uma solução ótima para uma
+estimativa inadequada pode ter pouca utilidade desportiva; por isso,
+a avaliação deve considerar a incerteza das estimativas e a
+compatibilidade entre os dados disponíveis e as decisões representadas.
+
+\section{Substituições e decisões sequenciais --- PLANTIA}
+\label{plantia:estado-da-arte-de-plantia}
+
+A seleção de um alinhamento num instante não resolve todo o problema
+do treinador. As substituições alteram a composição da equipa e as
+opções posteriores, pelo que importa representar a evolução dos estados
+e comparar sequências de ações. A literatura analisada inclui modelos
+descritivos de rotações, simulação de políticas e aprendizagem de
+decisões a partir de dados históricos.
+
+Bhat et al.~\cite{bhatSubstitutions} modelam substituições com dados
+\emph{play-by-play} da fase regular da NBA de 2014/2015. Representam a
+evolução dos alinhamentos por uma cadeia de Markov de tempo contínuo,
+estimam taxas de transição e utilizam regressão para avaliar o
+desempenho através do diferencial de pontos. Na simulação dos playoffs,
+previram os vencedores de 12 das 15 séries. A dimensão reduzida desta
+avaliação limita a generalização do resultado. Além disso, reproduzir
+substituições observadas não demonstra que uma política alternativa
+produziria melhores resultados.
+
+Guo et al.~\cite{guo2023} analisam as rotações por uma perspetiva
+complementar: redes de substituições construídas a partir de 574\,214
+eventos de dez temporadas da NBA. O estudo identifica associações entre
+a estrutura dessas redes e o desempenho competitivo. Enquanto Bhat et
+al. representam transições entre alinhamentos, a análise de redes
+caracteriza padrões de utilização e relações entre jogadores. Estes
+indicadores podem apoiar a descrição das rotações, mas as associações
+observadas não constituem uma política de decisão nem evidência causal
+de que reproduzir determinado padrão melhora o desempenho.
+
+Sandholtz e Bornn~\cite{sandholtz2020} avançam para a comparação de
+políticas através de processos de decisão de Markov aplicados a
+estratégias de lançamento. Combinam modelos Bayesianos hierárquicos,
+probabilidades de transição dinâmicas e simulação, considerando a
+evolução da posse e o tempo disponível para lançar. O interesse para
+o projeto reside na representação explícita de estados, ações e
+consequências, que permite avaliar escolhas alternativas. A adaptação
+para alinhamentos, minutos e fadiga constituiu uma proposta do presente
+trabalho, e não uma funcionalidade demonstrada nesse artigo.
+
+Chen et al.~\cite{chen2022} exploram aprendizagem por reforço
+\emph{offline} no sistema ReLiable, procurando aprender políticas
+táticas a partir de registos históricos. Esta abordagem permite
+investigar decisões sequenciais sem executar novas ações em jogos
+reais. Constitui uma possível extensão do projeto, após a construção
+e validação dos componentes fundamentais de simulação e avaliação.
+A aprendizagem de uma política deve ser distinguida da demonstração
+de que essa política é eficaz fora das condições em que foi avaliada.
+
+Em conjunto, estes trabalhos oferecem elementos para descrever
+rotações, estimar transições e comparar políticas. A escolha do método
+depende da decisão pretendida e dos dados disponíveis: uma cadeia de
+Markov pode representar a dinâmica observada, enquanto um processo de
+decisão de Markov explicita as ações a comparar. No projeto, a passagem
+de descrição para recomendação exigiu um ambiente comum, restrições
+explícitas e estratégias de referência que permitiram avaliar o contributo
+do planeamento.
+
+\section{Síntese comparativa e oportunidades de investigação}
+\label{plantia:anuxe1lise-cruxedtica-e-relauxe7uxe3o-com-o-projeto}
+
+A Tabela~\ref{tab:comparacao-estado-arte} reúne os trabalhos por problema
+e identifica os cuidados necessários à sua utilização no projeto.
+As limitações sintetizadas dizem respeito à interpretação ou à
+transferência dos contributos para o âmbito aqui proposto; não
+representam necessariamente limitações declaradas pelos autores.
+
+\begin{table*}[tp]
+\centering
+\small
+\singlespacing
+\caption{Comparação temática dos trabalhos e limites da sua aplicação ao projeto.}
+\label{tab:comparacao-estado-arte}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}
+ >{\raggedright\arraybackslash}p{(\textwidth-6\tabcolsep)*\real{0.19}}
+ >{\raggedright\arraybackslash}p{(\textwidth-6\tabcolsep)*\real{0.19}}
+ >{\raggedright\arraybackslash}p{(\textwidth-6\tabcolsep)*\real{0.27}}
+ >{\raggedright\arraybackslash}p{(\textwidth-6\tabcolsep)*\real{0.35}}@{}}
+\toprule
+Referência & Problema & Método ou contributo & Limite de aplicação ao projeto \\
+\midrule
+Lampis et al.~\cite{lampis2023} & Previsão pré-jogo & Comparação de ML e indicadores históricos & Superioridade dos algoritmos depende dos dados e da competição. \\
+Horvat et al.~\cite{horvat2023} & Previsão na NBA & Construção de indicadores estatísticos & Prever resultados não define ações do treinador. \\
+Ouyang et al.~\cite{ouyang2024} & Previsão explicável & XGBoost e SHAP & Explicações das previsões não estabelecem efeitos causais. \\
+Kandhway~\cite{kandhway2025} & Previsão durante o jogo & ML supervisionado e SHAP & Informação disponível difere da previsão pré-jogo. \\
+Li et al.~\cite{li2025} & Comparação da literatura & Revisão de 34 estudos & Dados e validações heterogéneos limitam comparações diretas. \\
+\midrule
+Grassetti et al.~\cite{grassetti2021} & Avaliação de alinhamentos & Plus-minus regularizado e modelos Bayesianos & Estimar desempenho não determina uma sequência de decisões. \\
+Kolias et al.~\cite{kolias2022} & Eficiência de formações & Modelação estatística de Markov & Avaliação ofensiva e defensiva requer um planeador adicional. \\
+Rodríguez Aguilar et al.~\cite{rodriguez2020} & Seleção de alinhamentos & Otimização e eficiência técnica & Eficiência técnica não equivale a vitórias ao longo de vários jogos. \\
+\midrule
+Bhat et al.~\cite{bhatSubstitutions} & Dinâmica de substituições & Markov em tempo contínuo e regressão & Avaliação em 15 séries; modelação observacional. \\
+Guo et al.~\cite{guo2023} & Padrões de rotação & Análise de redes de substituições & Associações não demonstram vantagens causais de uma política. \\
+Sandholtz e Bornn~\cite{sandholtz2020} & Decisões de lançamento & MDP com transições dinâmicas & Adaptação à gestão do plantel exige nova formulação. \\
+Chen et al.~\cite{chen2022} & Políticas táticas & Aprendizagem por reforço offline & Transferência para gestão de minutos exige avaliação própria. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+A primeira conclusão transversal é que a qualidade preditiva e a
+qualidade das decisões são dimensões distintas. Um modelo pode prever
+bem resultados agregados e não conter informação suficiente para
+comparar alterações concretas de alinhamento. Do mesmo modo, uma
+explicação estatística não quantifica necessariamente o efeito de uma
+ação. A integração exige previsões compatíveis com as alternativas do
+planeador e uma avaliação que distinga erros de previsão, cumprimento
+de restrições e resultados das políticas simuladas.
+
+A segunda conclusão diz respeito ao horizonte de decisão. Os trabalhos
+analisados fornecem contributos para previsão, avaliação de alinhamentos,
+substituições e políticas táticas, mas não demonstram diretamente uma
+solução completa que combine seleção do cinco, distribuição de minutos,
+fadiga e objetivos ao longo de várias jornadas. Esta observação delimita
+uma oportunidade no conjunto de publicações analisado; não permite
+concluir que inexistam outros sistemas integrados.
+
+O contributo do trabalho consistiu em estudar essa articulação num protótipo
+experimental, comparando decisões apoiadas por previsões com estratégias
+fixas e heurísticas simples. O âmbito inicial privilegiou a previsão
+pré-jogo e a simulação, mantendo a previsão dinâmica e a aprendizagem
+por reforço como extensões possíveis. As questões de investigação e a
+formulação encontram-se no Capítulo~\ref{chap:metodologia}; o protocolo
+de comparação é apresentado no Capítulo~\ref{chap:experiencias}.

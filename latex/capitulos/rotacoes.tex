@@ -1,0 +1,91 @@
+\chapter{Planeamento do cinco inicial e distribuição de minutos}
+\label{chap:rotacoes}
+
+O módulo de planeamento de rotações de PLANTIA usa programação por restrições com o solver
+OR-Tools CP-SAT. Conforme \path{docs/ROTATION_PLANNING.md}, seleciona
+o cinco inicial e constrói uma rotação completa para os 48 minutos
+regulamentares a partir dos modelos do módulo de avaliação de jogadores e alinhamentos.
+
+\section{Entradas e função objetivo}
+
+O plantel candidato é construído com o registo de equipa mais recente de
+cada jogador nos 30 dias anteriores à data do cenário. As características
+individuais usam apenas participações de dias anteriores, exigindo cinco
+participações na temporada. A data deve ser posterior ao treino dos
+modelos, e os hashes dos dados devem corresponder aos registados no
+experimento de desempenho.
+
+As posições provêm de uma fotografia biográfica sem versionamento
+histórico; disponibilidade e pertença ao plantel são hipóteses a rever.
+Candidatos sem posição ou histórico suficiente são excluídos. O adversário
+não é explicitamente modelado; no modelo aditivo de titulares, a contribuição
+de um adversário fixo seria constante entre alternativas.
+
+Para previsões não negativas de pontos, ressaltos e assistências,
+a prioridade individual por omissão é
+\[
+U_i=\widehat{P}_i+1{,}2\widehat{R}_i+1{,}5\widehat{A}_i.
+\]
+Previsões negativas são truncadas em zero. Sendo \(m_i\) os minutos,
+\(s_i\) a indicação de titular e \(\beta_i\) o coeficiente aditivo do
+módulo de avaliação de jogadores e alinhamentos, maximiza-se
+\[
+J=\sum_i U_i\frac{m_i}{48}+\lambda\sum_i\beta_i s_i,
+\qquad \lambda=1.
+\]
+O intercepto de vantagem de casa é omitido por ser constante; jogadores
+desconhecidos recebem coeficiente nulo e são sinalizados.
+
+Os pesos exprimem preferências do planeamento. Como o estimador prevê
+produção por participação, multiplicar pela fração de minutos constitui
+uma heurística, não uma previsão de produção marginal por minuto.
+A utilidade não mede pontos ou vitórias esperadas e pode favorecer
+jogadores cuja produção histórica reflete maior utilização.
+
+\section{Variáveis e restrições}
+
+O modelo usa variáveis booleanas \(x_{irt}\), que indicam se o jogador
+\(i\) ocupa o papel \(r\) no bloco \(t\), e \(y_{it}\), que indicam a sua
+presença em campo. Com duração de bloco \(\Delta\),
+\[
+y_{it}=\sum_r x_{irt},\qquad m_i=\Delta\sum_t y_{it},
+\qquad s_i=y_{i0}.
+\]
+Cada jogador ocupa no máximo um papel por bloco e só pode ocupar posições
+para as quais é elegível. Por omissão, existem 12 blocos de quatro minutos,
+cada um com dois lugares de base, dois de extremo e um de poste.
+Esta composição é uma hipótese configurável, não uma regra obrigatória da NBA.
+
+Em todos os blocos há exatamente cinco jogadores distintos. Se \(z_i\)
+indica utilização na rotação, as restrições por omissão incluem
+\[
+8\leq\sum_i z_i\leq10,\qquad
+8z_i\leq m_i\leq36z_i.
+\]
+A cobertura total implica \(\sum_i m_i=240\). Nenhum jogador pode disputar mais de três blocos consecutivos; cada janela
+de quatro blocos satisfaz \(\sum_{t=k}^{k+3}y_{it}\leq3\).
+Um bloco fora de campo permite regressar. As pausas entre períodos não
+reiniciam esta contagem. Jogadores indisponíveis têm zero minutos e os
+marcados como titulares obrigatórios devem integrar o primeiro bloco.
+
+Os limites são configuráveis, com minutos múltiplos da duração dos blocos.
+O modelo permite várias substituições na mesma fronteira e não representa
+prolongamentos, faltas, lesões durante o jogo ou respostas do adversário.
+
+\section{Resolução e verificação}
+
+O comando \path{scripts/plan_rotation.py} exporta entradas editáveis,
+solução, sequência de papéis por bloco, minutos e figura da rotação.
+O solver utiliza coeficientes escalados por 1\,000 e arredondados, uma
+semente de 42 e um único trabalhador para favorecer a reprodutibilidade.
+
+O estado \texttt{OPTIMAL} demonstra optimalidade apenas para o objetivo
+inteiro e as restrições fornecidas. \texttt{FEASIBLE} indica uma solução
+válida sem prova de optimalidade no tempo disponível; \texttt{INFEASIBLE}
+e \texttt{UNKNOWN} não produzem uma rotação bem-sucedida.
+Uma verificação independente confirma posições, disponibilidade, cinco
+inicial, minutos e descanso no horário exportado.
+
+As entradas guardadas podem ser editadas para alterar limites e
+indisponibilidades. Alterar apenas a data num ficheiro de configuração não
+atualiza as previsões; um novo cenário temporal exige reconstruir as entradas.

@@ -1,0 +1,253 @@
+\chapter{Recolha, preparação e tratamento dos datasets}
+\label{chap:data}
+
+Este capítulo descreve a componente atribuída ao módulo de preparação de dados do projeto
+Basketball AI Coach: recolha, preparação e tratamento dos conjuntos de
+dados (\emph{datasets}). Esta componente integra AAUTIA e fornece uma base
+comum aos módulos de aprendizagem automática e de planeamento de PLANTIA.
+
+A execução documentada em \path{docs/DATA_PREPARATION.md} e
+\path{docs/DATA_QUALITY_REPORT.md} do projeto \texttt{challenge-two}
+preparou 8\,283 jogos da fase regular da NBA, de 2019--20 a 2025--26,
+com origem principal na coleção \texttt{kaggle\_eoinamoore\_historical\_nba}.
+O relatório regista 16\,566 observações de equipa por jogo, 215\,473
+registos de jogador por jogo e 4\,607\,885 eventos.
+
+As secções seguintes descrevem a preparação realizada e os critérios
+adotados, distinguindo as extensões ainda condicionadas à validação das fontes.
+Na implementação documentada, os eventos estão preparados, mas os
+alinhamentos em campo não foram reconstruídos nem certificados. O
+módulo de avaliação de jogadores e alinhamentos utiliza os cinco iniciais observados; os minutos da fonte e os
+fusos horários dos relatórios de lesões não foram validados para os usos
+preditivos previstos. Os capítulos dos módulos de aprendizagem automática e de planeamento especificam os
+subconjuntos e as transformações efetivamente utilizados.
+
+\section{Responsabilidades e articulação com os restantes elementos}
+
+O módulo de preparação de dados foi responsável pela seleção e recolha dos dados, limpeza,
+análise exploratória, construção dos conjuntos de trabalho e documentação
+das transformações. Couberam-lhe também os testes de qualidade e as
+experiências de preparação, nomeadamente a comparação da cobertura e das
+consequências de diferentes regras de tratamento de valores em falta.
+Os requisitos dos dados, as interfaces e os critérios de avaliação foram
+definidos em conjunto com os responsáveis pelos módulos que os utilizam.
+
+A preparação foi orientada pelas seguintes necessidades:
+\begin{itemize}
+\item \textbf{Previsão de resultados:} dados por jogo,
+indicadores históricos das equipas e resultado usado como variável-alvo.
+\item \textbf{Avaliação de jogadores e alinhamentos:}
+estatísticas individuais, minutos de utilização e, quando disponíveis,
+intervalos de jogo com identificação dos jogadores em campo.
+\item \textbf{Cinco inicial e distribuição de minutos:}
+plantéis, posições e informação disponível sobre elegibilidade e utilização.
+\item \textbf{Planeamento das substituições:} sequência
+de eventos e substituições que permita construir estados e observar
+transições, quando a fonte ofereça essa granularidade.
+\item \textbf{Objetivos ao longo de vários jogos e
+integração:} calendário, resultados históricos e identificadores comuns
+para relacionar as entradas e saídas dos diferentes módulos.
+\end{itemize}
+
+O treino dos modelos, a estimação das transições e a definição dos
+problemas de planeamento ficaram a cargo dos respetivos elementos.
+O módulo de preparação de dados disponibilizou os dados e as regras de preparação necessários
+a essas tarefas, distinguindo os registos observados das hipóteses
+introduzidas pelos módulos.
+
+\section{Seleção das fontes e do âmbito}
+
+A seleção começou pela comparação de fontes que disponibilizavam
+resultados, estatísticas de equipas e jogadores e, quando possível,
+registos de eventos \emph{play-by-play}. Para cada fonte foram registados
+a cobertura temporal, as competições disponíveis, a granularidade,
+a documentação dos campos, as condições de acesso e reutilização e a
+possibilidade de reproduzir a recolha. Foi privilegiada uma competição
+com várias temporadas consecutivas e identificadores consistentes.
+
+A escolha atendeu às necessidades de cada tarefa. A previsão
+pré-jogo requer resultados e estatísticas históricas; a avaliação de
+alinhamentos exige identificar os cinco jogadores em campo e os intervalos
+da sua utilização. Dados agregados por partida podem sustentar o primeiro
+objetivo sem permitir o segundo. Antes da seleção definitiva, uma amostra
+foi inspecionada para confirmar a existência e a qualidade dos campos
+necessários. Como os alinhamentos não foram reconstruídos com confiança,
+a avaliação utilizou os cinco iniciais observados, mantendo explícita
+essa limitação.
+
+Foram definidos os critérios de inclusão de jogos, temporadas e fases
+da competição. Partidas canceladas, registos incompletos e alterações
+de formato foram tratados segundo regras documentadas. A quantidade
+final de jogos e jogadores, o período abrangido e os motivos de exclusão
+foram apresentados após a recolha.
+
+\section{Recolha e organização dos dados}
+
+Os ficheiros originais foram preservados, acompanhados pela identificação
+da fonte, data de recolha e versão do procedimento utilizado. A organização
+separou dados originais, dados limpos e conjuntos preparados para
+modelação, permitindo repetir as transformações sem modificar a origem.
+
+A estrutura relacionou jogos, equipas e jogadores através de
+identificadores estáveis. Os jogos incluíram data, competição, temporada,
+equipas e resultado; as estatísticas individuais foram associadas ao
+jogador, à equipa e à partida. Quando disponíveis, os eventos incluíram
+o período, o instante, o tipo de ocorrência e os intervenientes.
+Um dicionário de dados descreveu o significado, a unidade e os valores
+admissíveis de cada campo.
+
+A integração entre fontes exigiu verificar correspondências de nomes,
+identificadores, datas e equipas. Transferências de jogadores foram
+representadas com referência temporal, evitando atribuir a uma partida
+informação sobre um plantel posterior. A ordenação dos eventos respeitou
+o período e o sentido do relógio de jogo, incluindo prolongamentos.
+
+\section{Limpeza e análise exploratória}
+
+A limpeza identificou duplicados, campos em falta, tipos incorretos e
+valores inconsistentes. Foram verificadas, por exemplo, a unicidade dos
+jogos, a relação entre lançamentos convertidos e tentados e a coerência
+dos resultados. Um valor ausente foi distinguido de um zero observado,
+como no caso de estatísticas de jogadores que não participaram.
+
+O tratamento de omissões dependeu do campo e da tarefa. A ausência do
+resultado impede a utilização de uma partida como exemplo supervisionado;
+a falta de uma variável explicativa podia justificar imputação, um
+indicador de ausência ou exclusão. As decisões foram documentadas e a
+sua incidência quantificada. Valores extremos foram inspecionados antes
+de qualquer decisão de remoção, pois podem corresponder a desempenhos reais ou a
+jogos com prolongamento.
+
+A análise exploratória caracterizou a cobertura por temporada, os dados
+em falta, a distribuição dos resultados e as diferenças entre equipas.
+Foram também examinadas mudanças de distribuição ao longo do tempo.
+A exploração usada para escolher variáveis e transformações ficou
+limitada aos dados de desenvolvimento, preservando o conjunto de teste
+para a avaliação final.
+
+\section{Construção do conjunto para previsão de resultados}
+
+Para a previsão pré-jogo, cada observação representou uma partida,
+com características das duas equipas e uma variável-alvo binária:
+vitória da equipa da casa ou da equipa visitante. Jogos em campo neutro
+tiveram uma indicação própria. O resultado final serviu para construir
+o alvo, mas não integrou as variáveis explicativas da mesma partida.
+Identificadores foram conservados para rastreabilidade e agrupamento,
+sem serem automaticamente utilizados como entradas do modelo.
+
+As características candidatas incluíram médias móveis de pontos,
+eficiência ofensiva e defensiva, aproveitamento dos lançamentos,
+ressaltos, assistências, perdas de bola e dias de descanso. Podiam ser
+representadas separadamente por equipa ou por diferenças entre as duas.
+As janelas históricas foram definidas durante a validação, e o início
+de temporada ou a falta de histórico tiveram um tratamento explícito.
+
+Todas as agregações foram calculadas apenas com jogos anteriores ao
+instante da previsão. Estatísticas da própria partida, classificações
+finais da temporada e informação posterior sobre lesões ou alinhamentos
+não podiam alimentar uma previsão pré-jogo. A utilização de informação
+sobre jogadores disponíveis dependeu de ser possível confirmar que
+estava acessível nesse instante.
+
+As variáveis categóricas foram codificadas e as numéricas podiam ser
+normalizadas quando o algoritmo o justificava. Imputação, normalização,
+seleção de características e outras transformações aprendidas foram
+ajustadas exclusivamente nos dados de treino de cada divisão. O mesmo
+procedimento foi depois aplicado à validação e ao teste, sem recalcular
+parâmetros nesses conjuntos.
+
+\section{Construção do conjunto para avaliação de jogadores}
+
+O conjunto individual teve uma observação por jogador e partida, associada
+à equipa que representava nessa data. Incluiu, conforme a cobertura da
+fonte, minutos, pontos, lançamentos, ressaltos, assistências, perdas de
+bola e faltas. A participação efetiva foi distinguida da presença no
+plantel, para não interpretar a ausência de utilização como um desempenho
+nulo observado em campo.
+
+Foram preparados indicadores históricos de utilização e desempenho,
+calculados apenas a partir de partidas anteriores ao instante de previsão.
+A comparação de jogadores podia recorrer a estatísticas por minuto ou
+por posse, quando existiam dados suficientes para calcular esses valores.
+Denominadores nulos e amostras reduzidas tiveram tratamento explícito,
+conservando-se o número de jogos e os minutos que sustentam cada indicador.
+
+A variável-alvo de desempenho foi acordada com o módulo de avaliação de jogadores e alinhamentos, identificando
+a unidade de observação e o horizonte a prever. As estatísticas da partida
+avaliada podiam servir como alvo ou como medida de avaliação, mas não
+como informação de entrada para prever essa mesma partida. O protocolo de preparação
+dos intervalos de alinhamentos é descrito na secção dedicada ao planeamento.
+
+\section{Divisão temporal e prevenção de fuga de informação}
+
+O conjunto foi dividido cronologicamente em treino, validação e teste.
+Os jogos mais antigos serviram para aprender os modelos, um período
+posterior para selecionar configurações e o período mais recente para
+a avaliação final. As datas de corte dependeram da cobertura disponível
+e foram registadas antes da comparação final, juntamente com o número
+de observações em cada divisão.
+
+O protocolo de desenvolvimento contemplou a possibilidade de validação
+com janela de treino crescente, com aprendizagem sobre o passado e
+avaliação num bloco posterior. Não foi usada uma divisão aleatória que misturasse
+jogos futuros e passados. Quando existiam várias observações da mesma
+partida, todas permaneceram na mesma divisão.
+
+O protocolo distinguiu a atualização de indicadores com resultados de
+jogos entretanto concluídos do reajuste do modelo. Numa avaliação
+sequencial, esses resultados podiam atualizar o histórico para o jogo
+seguinte, desde que isso correspondesse ao funcionamento previsto e não
+fosse usado para escolher configurações a partir do desempenho no teste.
+
+\section{Dados para alinhamentos e planeamento}
+
+A reconstrução de intervalos com um alinhamento constante não foi
+realizada na execução documentada. O protocolo definido para essa extensão
+previa registar jogadores, duração, adversário e diferencial de pontos,
+conhecer o cinco inicial e processar substituições pela ordem correta.
+Previa também sinalizar intervalos ambíguos ou incompatíveis com cinco
+jogadores por equipa e tratá-los segundo critérios explícitos.
+
+Para essa extensão, ficaram definidos os seguintes requisitos: considerar
+o tempo ou o número de posses observadas na avaliação dos alinhamentos,
+manter os intervalos da mesma partida juntos na divisão temporal e
+estimar desempenhos e transições apenas com os dados de treino.
+Na execução realizada, a avaliação dos alinhamentos utilizou os cinco
+iniciais observados, sem os equiparar a intervalos reconstruídos.
+
+Para o planeamento foram ainda necessários calendário, plantel elegível
+e restrições de utilização. Disponibilidade observada e hipóteses de
+simulação foram distinguidas. A fadiga, se modelada a partir de minutos
+e descanso, foi apresentada como uma aproximação definida no projeto,
+e não como uma medição direta da condição física.
+
+\section{Rastreabilidade e resultados da preparação}
+
+O processo produziu um conjunto para previsão pré-jogo, um conjunto para
+avaliação individual e dados de eventos. A construção de um conjunto de
+intervalos de alinhamentos permaneceu pendente de reconstrução e validação. Foram ainda
+organizados os dados de calendário e plantel necessários à integração. Cada versão incluiu o dicionário de dados, as regras de
+limpeza, a definição das características, os períodos de treino,
+validação e teste e um resumo dos registos excluídos.
+
+As interfaces de entrega especificaram o formato dos ficheiros, as chaves
+de ligação, os tipos e unidades dos campos, a representação de valores
+ausentes e o instante de referência da informação. Os conjuntos partilharam
+os identificadores de jogo, equipa e jogador e um protocolo temporal
+comum, permitindo cruzar previsões e decisões sem misturar períodos de
+treino e avaliação. Alterações de estrutura ou de regras de preparação
+foram registadas numa nova versão e comunicadas aos restantes elementos.
+
+O relatório da preparação apresentou a cobertura por temporada, os
+números de jogos e jogadores, a proporção de valores em falta e os efeitos
+das exclusões e transformações. A entrega foi acompanhada pelos
+procedimentos de recolha e preparação, pelas configurações utilizadas e
+pelos resultados dos testes de qualidade, permitindo aos restantes
+elementos reproduzir os conjuntos recebidos.
+
+Os procedimentos e configurações foram conservados para permitir repetir
+a preparação. Antes da modelação, foram verificadas a ausência de
+sobreposição entre divisões, a coerência dos identificadores e a
+disponibilidade temporal das variáveis. Esta documentação permitiu
+relacionar os resultados experimentais com os dados e as hipóteses que
+os produziram.

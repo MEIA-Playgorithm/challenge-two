@@ -1,0 +1,230 @@
+\chapter{Planeamento das substituições por MDP e algoritmo genético}
+\label{chap:substituicoes}
+
+O módulo de planeamento de substituições de PLANTIA adapta a ordem dos blocos da rotação do módulo de planeamento de rotações
+através de um MDP de horizonte finito, resolvido por programação dinâmica
+retrospetiva, e compara essa solução exata com uma política adaptativa
+obtida por algoritmo genético (AG). A especificação segue
+\path{docs/SUBSTITUTION_PLANNING.md} e
+\path{docs/GENETIC_SUBSTITUTIONS.md}. O MDP define o problema sequencial;
+a programação dinâmica e o AG são dois métodos para procurar uma política
+nesse mesmo problema.
+O planeador reorganiza alinhamentos existentes dentro de cada período,
+preservando os minutos individuais atribuídos nesse período.
+
+\section{Estados e ações admissíveis}
+
+O estado contém o índice do bloco temporal, os identificadores dos blocos
+ainda disponíveis no período, o número de blocos consecutivos de cada
+jogador em campo, o bloco anteriormente utilizado e um contexto observado.
+O contexto assume um de três valores: equilibrado, criação de jogo ou
+ressalto. Esta representação permite determinar ações, recompensa e
+transições sem guardar todo o histórico do encontro.
+
+Uma ação escolhe um dos blocos originais ainda disponíveis no período.
+O bloco original zero é obrigatório no início, preservando o cinco inicial.
+No período seguinte entram os blocos originalmente atribuídos a esse
+período. Ações com o mesmo conjunto de jogadores usam um representante.
+São rejeitadas escolhas que ultrapassem o limite de blocos consecutivos
+ou que impossibilitem completar a rotação.
+
+A reorganização conserva posições, disponibilidade, dimensão da rotação
+e minutos por jogador e período. As pausas entre períodos não reiniciam
+os contadores de utilização consecutiva. A implementação exata suporta
+blocos de quatro, seis ou doze minutos; blocos mais finos são rejeitados
+para limitar o crescimento da procura por permutações.
+
+\section{Transições e recompensa}
+
+A ocupação do campo, os blocos restantes e os contadores evoluem
+deterministicamente com a ação. O contexto seguinte segue, por omissão,
+a matriz
+\[
+P=\begin{pmatrix}
+0{,}6&0{,}2&0{,}2\\
+0{,}2&0{,}6&0{,}2\\
+0{,}2&0{,}2&0{,}6
+\end{pmatrix}.
+\]
+Todos os episódios começam em contexto equilibrado. A matriz é independente
+da ação e constitui uma hipótese de simulação, não uma transição aprendida
+com dados de adversários. A utilização real exigiria uma regra validada
+para observar o contexto durante o jogo.
+
+O bónus \(B_i(c)\) é zero no contexto equilibrado, \(0{,}4\widehat{A}_i\)
+na criação de jogo e \(0{,}4\widehat{R}_i\) no ressalto. Para o conjunto
+ativo \(L(a)\), contagem anterior \(k_i\) e número de jogadores que entram
+\(n_{\mathrm{ent}}\), a recompensa é
+\[
+r(s,a)=\frac{\Delta}{48}\sum_{i\in L(a)}
+[U_i+B_i(c)]\max(0,1-fk_i)-\kappa n_{\mathrm{ent}},
+\]
+com \(f=0{,}08\) e \(\kappa=0{,}15\) por omissão. O cinco inicial não paga
+custo de substituição. Um bloco no banco reinicia a fadiga aproximada;
+esta regra não constitui um modelo fisiológico. O termo dos coeficientes
+de titulares é omitido porque o cinco inicial permanece fixo.
+
+\section{Solução exata por programação dinâmica}
+
+A utilidade total não é descontada. Para o estado terminal \(s_T\),
+\[
+\begin{aligned}
+V(s_T)&=0,\\
+V(s)&=\max_{a\in\mathcal{A}(s)}\biggl[r(s,a)\\
+&\quad+\sum_{c'}P(c'\mid c)V(s'(s,a,c'))\biggr].
+\end{aligned}
+\]
+A implementação memoriza os valores e exporta uma ação maximizadora para
+cada estado de decisão viável avaliado. A optimalidade aplica-se apenas
+às ações restritas, à recompensa e à matriz de transição especificadas.
+Não são representados diferencial de pontos, faltas, novas lesões,
+prolongamentos ou mudanças do alinhamento adversário.
+
+\section{Algoritmo genético para políticas adaptativas}
+
+\subsection{Representação e admissibilidade}
+
+Um cromossoma contém um gene inteiro por estado de decisão viável.
+Para os estados \(s_1,\ldots,s_n\), representa-se o indivíduo por
+\[
+\boldsymbol{g}=(g_1,\ldots,g_n),\qquad
+ g_j\in\{0,\ldots,|\mathcal{A}(s_j)|-1\}.
+\]
+O gene seleciona uma ação da lista admissível do respetivo estado,
+definindo uma política determinista \(\pi_{\boldsymbol{g}}\). Como o estado
+inclui o contexto observado, o indivíduo representa uma política adaptativa,
+não um horário fixo. Assim, a comparação com a programação dinâmica
+mantém a mesma capacidade de reagir aos contextos modelados.
+
+Uma recursão estrutural elimina ações que não permitem terminar a rotação
+respeitando o descanso. Esta verificação não consulta recompensas nem
+valores ótimos de Bellman. As ações preservam os titulares originais,
+as posições e os minutos individuais por período. A evolução utiliza
+apenas genes legais e não recebe ações ou valores ótimos do MDP.
+A documentação inclui um teste que verifica que a evolução não chama
+o otimizador por programação dinâmica.
+
+\subsection{População e operadores evolutivos}
+
+A população inicial contém 40 cromossomas com genes legais escolhidos
+aleatoriamente. Após a avaliação inicial, executam-se 40 gerações com
+os seguintes operadores:
+\begin{itemize}
+\item Seleção de progenitores por torneios de três indivíduos.
+\item Cruzamento uniforme: cada gene é escolhido de um dos progenitores
+ com probabilidade de 0,5 para cada um.
+\item Mutação independente por gene com probabilidade de 0,1, sorteando
+ novamente uma ação legal. O sorteio pode conservar o valor anterior.
+\item Elitismo: os dois melhores indivíduos transitam sem alterações.
+\end{itemize}
+Como cada posição do cromossoma mantém o seu domínio de ações admissíveis,
+os operadores não introduzem ações ilegais. São realizadas cinco execuções
+independentes, com sementes de 42 a 46, para observar a variabilidade
+entre pesquisas.
+
+\subsection{Função de aptidão e referência exata}
+
+A aptidão é a utilidade total esperada exata da política sob a matriz de
+transição assumida. A avaliação de um cromossoma calcula
+\[
+\begin{aligned}
+V^{\pi}(s_T)&=0,\\
+V^{\pi}(s)&=r(s,\pi(s))\\
+&\quad+\sum_{c'}P(c'\mid c)V^{\pi}(s'(s,\pi(s),c')).
+\end{aligned}
+\]
+Ao contrário da equação de Bellman, esta expressão não maximiza sobre
+ações: avalia a ação fixada pelo gene. A aptidão é
+\(F(\boldsymbol{g})=V^{\pi_{\boldsymbol{g}}}(s_0)\), com contexto inicial
+equilibrado. A avaliação memoriza valores e reutiliza a aptidão de
+cromossomas repetidos. A melhor execução é selecionada pela utilidade
+esperada exata, antes das comparações por simulação.
+
+O valor ótimo \(V^*(s_0)\) da programação dinâmica fornece um limite
+superior para o mesmo modelo. A diferença
+\[
+\Delta_{\mathrm{AG}}=V^*(s_0)-F(\boldsymbol{g}_{\mathrm{melhor}})
+\]
+deve ser não negativa, admitindo tolerância numérica. O AG é estocástico
+e não fornece, em geral, prova de optimalidade. A igualdade com a referência
+exata permite reconhecer uma solução ótima apenas para aquela execução
+e aquele problema finito.
+
+\section{Protocolo de comparação e limitações}
+
+A comparação alargada avalia quatro políticas: solução exata por programação
+dinâmica, AG, ordem fixa do módulo de planeamento de rotações e política gulosa. Esta última
+maximiza a recompensa imediata entre ações com conclusão viável.
+Todas utilizam os mesmos estados, ações, transições e recompensas.
+O experimento genético recalcula a referência exata com parâmetros iguais,
+sem alterar os relatórios originais do experimento MDP.
+
+Além das esperanças exatas, as quatro políticas são avaliadas nas mesmas
+500 trajetórias simuladas de contexto, com semente 10042, separada das
+sementes de evolução. As comparações emparelhadas e os respetivos intervalos
+medem apenas erro de amostragem da simulação. Não incluem incerteza dos
+modelos preditivos, dos parâmetros ou dos resultados desportivos reais.
+Todas as rotações simuladas recebem verificações independentes de minutos,
+posições, disponibilidade, titulares e descanso, incluindo os totais
+exatos por período.
+
+O experimento original do MDP usa semente 42 na simulação e estuda
+persistência entre 0,3 e 0,8 e fadiga entre 0 e 0,16. A comparação genética
+inclui um relatório adicional com penalização de fadiga nula. Este cenário
+estuda sensibilidade a uma hipótese; não afirma que jogadores reais não
+sofrem fadiga. Os resultados dos dois cenários genéticos são apresentados
+no Capítulo~\ref{chap:experiencias}.
+
+No cenário documentado existem 46 estados de decisão viáveis, mas apenas
+três oferecem várias ações, originando oito cromossomas possíveis. Todas
+as cinco execuções avaliam os oito. A convergência pode, por isso, ser
+plana desde a geração inicial. A igualdade com a solução exata neste
+espaço reduzido não demonstra maior eficiência ou escalabilidade do AG.
+
+A enumeração estrutural dos estados, a aptidão exata e a representação
+completa por estado limitam ambos os métodos. O AG mantém a restrição a
+blocos de quatro, seis ou doze minutos. Espaços maiores exigiriam uma
+representação compacta da política ou avaliação aproximada da aptidão.
+Os tempos registados separam enumeração, evolução e resolução exata,
+excluindo simulação, figuras e exportação; não constituem um estudo
+controlado de desempenho computacional.
+
+Os testes documentados cobrem reprodutibilidade, elitismo, legalidade dos
+genes, independência dos valores ótimos, avaliação da aptidão e respeito
+pelo limite superior exato. Para a programação dinâmica, incluem também
+comparação com enumeração exaustiva num exemplo determinista pequeno.
+
+\section{Consulta e integração}
+
+O comando \path{scripts/plan_substitutions.py} produz política, métricas,
+simulações e exemplo de rotação. O comando
+\path{scripts/query_substitution.py} consulta uma decisão a partir do
+estado observado e devolve jogadores que entram e saem, papéis e utilidade
+restante. Estados ausentes produzem erro. Mudanças de plantel,
+disponibilidade ou minutos exigem gerar novamente a rotação e a política.
+
+O comando \path{scripts/compare_genetic_substitutions.py} executa a
+comparação genética e guarda os resultados em
+\path{reports/genetic_substitutions/}. Os artefactos incluem
+\texttt{metrics.json}, resultados por semente em \texttt{runs.csv},
+curvas de convergência, \texttt{policy.json}, simulações e uma trajetória
+exemplificativa. O marcador \texttt{\_SUCCESS} confirma a conclusão das
+verificações. A opção \texttt{--fatigue 0}, com outro diretório de saída,
+reproduz a análise sem penalização de fadiga.
+
+A política genética usa o mesmo formato de consulta:
+\begin{quote}
+\small
+\path{python scripts/query_substitution.py}\\
+\texttt{--policy}\\
+\path{reports/genetic_substitutions/policy.json}
+\end{quote}
+A opção \texttt{--state} permite fornecer um estado observado posterior.
+O campo \texttt{value} representa a utilidade esperada restante da política
+selecionada, não uma afirmação geral de optimalidade.
+
+É possível comparar políticas para um jogo do módulo de planeamento de vários jogos fornecendo o
+respetivo diretório através de \texttt{--rotation-dir}. Esta execução
+preserva os minutos selecionados e não substitui automaticamente a política
+MDP do horizonte integrado. Uma eventual escolha da política genética
+para utilização deve ser distinguida da sua avaliação comparativa.

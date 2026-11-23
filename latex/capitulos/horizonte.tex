@@ -1,0 +1,100 @@
+\chapter{Planeamento de vários jogos e integração dos módulos}
+\label{chap:horizonte}
+
+O módulo de planeamento de vários jogos de PLANTIA integra as componentes num plano de vários jogos,
+com objetivo de vitórias e limites partilhados de minutos. O procedimento
+\path{scripts/plan_horizon.py}, descrito em
+\path{docs/HORIZON_PLANNING.md}, reutiliza os modelos e planeadores dos
+módulos de previsão de resultados, avaliação de jogadores, planeamento de rotações e planeamento de substituições sobre os dados do módulo de preparação de dados.
+
+\section{Informação congelada e objetivo competitivo}
+
+Uma única data de corte, posterior ao treino dos modelos, delimita as
+observações utilizáveis para todos os jogos. O calendário fornece datas
+e equipas, sem resultados futuros. As variáveis de descanso consideram
+os jogos agendados, mas estatísticas das equipas, número de jogos disputados
+e Elo permanecem congelados. Trata-se de uma aproximação de força constante
+para jogos futuros, distinta da avaliação diária do módulo de previsão de resultados.
+
+O plantel e as prioridades individuais são calculados uma única vez na
+data de corte. As prioridades usam o contexto de equipa da casa mesmo
+nos encontros fora, permitindo uma pontuação de alocação consistente,
+mas não uma nova previsão individual por encontro. Assume-se estabilidade
+do plantel dentro da temporada, admitindo indisponibilidades explicitamente
+fornecidas por jogo. O calendário histórico não é versionado, pelo que a
+sua disponibilidade antecipada é uma hipótese do cenário retrospetivo.
+
+Se \(p_g\) é a probabilidade de vitória da equipa planeada no jogo \(g\),
+o número esperado de vitórias é \(\sum_g p_g\). Para calcular a probabilidade
+de atingir pelo menos \(K\) vitórias, o sistema assume resultados
+independentes e calcula a convolução de Bernoulli. Sendo \(q_g(k)\) a
+probabilidade de \(k\) vitórias após \(g\) jogos,
+\[
+q_g(k)=(1-p_g)q_{g-1}(k)+p_gq_{g-1}(k-1),\qquad q_0(0)=1,
+\]
+com probabilidades nulas fora dos índices válidos. Assim,
+\(\Pr(W\geq K)=\sum_{k=K}^{G}q_G(k)\).
+A esperança não exige independência, mas esta distribuição exige-a.
+Lesões comuns, forma da equipa e erros correlacionados dos modelos não
+são representados. O objetivo de vitórias é incerto, não uma restrição
+cujo cumprimento o solver possa garantir.
+
+\section{Seleção conjunta de rotações}
+
+Para cada jogo, o módulo de planeamento de rotações gera candidatos com limites individuais de
+36, 32 e 28 minutos. Mantêm-se as restantes restrições de rotação, posições,
+descanso e disponibilidade. Cada candidato viável cobre 240 minutos-jogador;
+os candidatos inviáveis são excluídos.
+
+Se \(z_{gc}\) indica a seleção do candidato \(c\) para o jogo \(g\),
+\(m_{igc}\) os seus minutos e \(J_{gc}\) a sua utilidade, um segundo
+modelo CP-SAT impõe
+\[
+\sum_c z_{gc}=1,\qquad
+\sum_{g,c}m_{igc}z_{gc}\leq M_i.
+\]
+Para cada par de jogos em dias consecutivos, a soma dos minutos de cada
+jogador não pode ultrapassar o limite correspondente. Por omissão,
+\(M_i=96\) no horizonte de três jogos e o limite para dias consecutivos
+é 64 minutos. Estes limites são hipóteses configuráveis do planeamento.
+
+A função objetivo é
+\[
+\max\sum_{g,c}\left[1+4p_g(1-p_g)\right]J_{gc}z_{gc}.
+\]
+O fator dá prioridade a encontros mais equilibrados. É uma preferência
+heurística, não uma estimativa de retorno do esforço em vitórias.
+A probabilidade de alcançar o objetivo é reportada separadamente: a
+seleção de rotações não altera as probabilidades previstas pelo módulo de previsão de resultados.
+
+A optimalidade refere-se apenas aos candidatos gerados e aos coeficientes
+inteiros arredondados. Cada candidato pode ser apenas viável, devido ao
+limite de dez segundos na sua resolução; a seleção conjunta tem limite
+de 30 segundos. Um conjunto inviável de candidatos não prova a inexistência
+de outra solução fora desse conjunto.
+
+\section{Políticas de substituição e replaneamento}
+
+Após selecionar as rotações, o módulo de planeamento de substituições calcula uma política MDP por
+jogo. Como conserva os minutos de cada jogador em cada período, conserva
+também os limites acumulados do horizonte. A recompensa do MDP é distinta
+da utilidade da rotação e ambas são apresentadas separadamente. O exemplo
+exportado segue contexto equilibrado, embora a política cubra os três
+contextos modelados. A extensão genética do módulo de planeamento de substituições permite comparar
+uma política alternativa para cada rotação selecionada, mas não substitui
+automaticamente a política MDP utilizada pelo horizonte integrado.
+
+A execução produz previsões por jogo, distribuição do número de vitórias,
+minutos acumulados, seleção dos candidatos e, por encontro, entradas,
+solução, política, minutos e horário. Verificações independentes controlam
+os limites individuais e os pares em dias consecutivos. Os testes
+documentados incluem a distribuição de vitórias, o corte temporal comum,
+conflitos de orçamento de minutos e calendários inválidos.
+
+Depois de cada jogo, o utilizador atualiza observações e disponibilidade,
+avança a data de corte e executa novamente o horizonte restante. Alterações
+nos dados preparados exigem reconstruir os artefactos de desempenho devido
+à verificação dos hashes. O procedimento não acompanha jogos em direto
+nem converte resultados simulados em observações reais. Os limites cobrem
+apenas os jogos fornecidos, pelo que o calendário deve incluir todos os
+encontros da equipa no horizonte.

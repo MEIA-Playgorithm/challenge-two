@@ -1,0 +1,89 @@
+\chapter{Introdução}
+\label{chap:introducao}
+
+\section{Enquadramento e motivação}
+
+A preparação de uma equipa de basquetebol exige decisões sobre o cinco
+inicial, a distribuição de minutos e as rotações, conciliando o desempenho
+imediato com a disponibilidade do plantel para jogos posteriores. Os dados
+históricos, as estatísticas individuais e os registos \emph{play-by-play}
+permitem analisar resultados e alinhamentos, apoiando a comparação de
+alternativas pelo treinador.
+
+Desenvolvido nas unidades curriculares de Aprendizagem Automática (AAUTIA)
+e Planeamento em Inteligência Artificial (PLANTIA), este trabalho propõe
+um sistema inteligente de apoio à decisão que articula previsões de
+resultados e desempenho com a seleção de ações sujeitas a restrições.
+
+\section{Problema de investigação}
+
+Prever a probabilidade de vitória não basta para recomendar decisões:
+é necessário representar os jogadores elegíveis, os alinhamentos, os
+minutos de utilização e os objetivos do treinador. As previsões devem
+ser compatíveis com as alternativas avaliadas pelo planeador, pois
+estatísticas agregadas podem ser insuficientes para comparar alterações
+concretas na equipa.
+
+A questão central é: \emph{em que medida a integração de previsões de
+aprendizagem automática com métodos de planeamento e otimização pode
+melhorar as decisões simuladas de gestão de uma equipa de basquetebol,
+face a estratégias fixas ou heurísticas simples?}
+
+A avaliação distinguiu a qualidade preditiva da qualidade das decisões.
+As associações históricas não demonstram efeitos causais de substituições
+ou alterações de minutos; as conclusões dependeram das hipóteses e da
+validade do ambiente de simulação.
+
+\section{Objetivos do trabalho}
+
+O objetivo geral foi desenvolver e avaliar um protótipo que integre previsão
+e planeamento. Os objetivos específicos foram:
+
+\begin{enumerate}
+  \item Organizar dados históricos e construir indicadores com informação
+  disponível no momento de cada previsão.
+  \item Comparar modelos supervisionados para prever vitórias e, quando
+  possível, o desempenho de alinhamentos.
+  \item Analisar os fatores que contribuem para as previsões e facilitar
+  a sua interpretação.
+  \item Formular a seleção de jogadores e a distribuição de minutos sob
+  restrições de disponibilidade, utilização e composição da equipa.
+  \item Comparar métodos de otimização e planeamento num ambiente comum,
+  incluindo sequências de vários jogos.
+  \item Avaliar a integração dos módulos quanto à previsão, ao cumprimento
+  das restrições e aos resultados simulados.
+\end{enumerate}
+
+\section{Abordagem proposta e âmbito}
+
+A componente de AAUTIA prepara dados históricos da NBA e compara modelos
+para prever vitórias, produção individual e margem final associada aos
+cinco iniciais. A seleção dos modelos utiliza validação temporal, seguida
+de avaliação numa temporada de teste. Os alinhamentos considerados são
+os titulares, não todos os quintetos utilizados durante o jogo.
+
+A componente de PLANTIA utiliza programação por restrições para construir
+rotações, um MDP de horizonte finito para reorganizar blocos dentro de cada
+período, comparando a solução exata com um algoritmo genético, e uma
+seleção conjunta de rotações para vários jogos. As previsões
+de vitória permitem quantificar objetivos competitivos, enquanto as
+prioridades individuais alimentam funções de utilidade explicitamente
+heurísticas.
+
+O relatório descreve a implementação e as experiências registadas no
+projeto. Distingue resultados preditivos, utilidade simulada e cumprimento
+de restrições, sem interpretar estes últimos como provas de ganhos em
+jogos reais. O âmbito é retrospetivo, com hipóteses de disponibilidade,
+contexto e fadiga documentadas.
+
+\section{Organização do relatório}
+
+O Capítulo~\ref{chap:estado-arte} apresenta os trabalhos que fundamentam
+a proposta e o Capítulo~\ref{chap:data} descreve a componente de dados.
+O Capítulo~\ref{chap:metodologia} estabelece o protocolo e as interfaces.
+Os Capítulos~\ref{chap:previsao-resultados} e~\ref{chap:desempenho}
+desenvolvem as tarefas dos módulos de previsão de resultados e de avaliação de jogadores e alinhamentos. Os
+Capítulos~\ref{chap:rotacoes}, \ref{chap:substituicoes} e~\ref{chap:horizonte}
+apresentam o planeamento dos módulos de rotações, substituições e horizonte de vários jogos. O
+Capítulo~\ref{chap:experiencias} reúne os resultados e a discussão;
+o Capítulo~\ref{chap:conclusoes} apresenta conclusões e trabalho futuro.

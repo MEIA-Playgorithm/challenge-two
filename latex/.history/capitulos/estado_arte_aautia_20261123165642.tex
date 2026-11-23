@@ -1,0 +1,69 @@
+Este capítulo analisa os trabalhos relacionados com três problemas do
+apoio à decisão no basquetebol: prever resultados, avaliar e selecionar
+alinhamentos e planear sequências de decisões. A previsão enquadra-se na
+componente de AAUTIA; a otimização e o planeamento, na de PLANTIA. A
+avaliação dos alinhamentos estabelece a ligação entre ambas, ao fornecer
+estimativas que podem orientar a escolha de ações. A revisão termina com
+uma comparação dos trabalhos e das oportunidades de integração identificadas.
+
+\section{Previsão de resultados e explicabilidade}
+\label{aautia:estado-da-arte-de-aautia}
+
+A previsão pré-jogo procura estimar o resultado de uma partida com base
+na informação disponível antes do seu início. Neste contexto, a escolha
+dos algoritmos está ligada à construção das características e ao modo
+como se avalia a capacidade de generalização para jogos futuros.
+Lampis et al.~\cite{lampis2023} e Horvat et al.~\cite{horvat2023}
+exploram estas dimensões em competições europeias e na NBA,
+respetivamente, oferecendo referências complementares para a preparação
+dos dados e a comparação de modelos.
+
+Lampis et al.~\cite{lampis2023} analisaram 5\,214 jogos de quatro
+competições europeias, realizados entre 2013 e 2018. Compararam Regressão
+Logística, Random Forest, XGBoost e combinações de modelos, utilizando
+estatísticas históricas e sistemas de classificação como Elo, PageRank
+e \emph{pi-rating}. Os indicadores adicionais melhoraram a exatidão em
+cerca de três a cinco pontos percentuais face às referências mais
+simples. Contudo, nenhum algoritmo foi universalmente superior: o
+desempenho variou com a competição e as características dos dados.
+
+Horvat et al.~\cite{horvat2023} dão particular atenção à definição
+matemática das estatísticas e dos indicadores derivados utilizados na
+previsão de jogos da NBA. Em conjunto, estes trabalhos sustentam uma
+comparação que avalie tanto o algoritmo como a informação que o alimenta.
+Indicadores de eficiência ofensiva e defensiva, forma recente,
+lançamentos, ressaltos e perdas de bola constituem possíveis entradas,
+desde que calculados apenas com dados disponíveis no momento da previsão.
+A utilização de informação posterior ao jogo comprometeria a avaliação
+de um sistema destinado à previsão pré-jogo.
+
+A interpretação das previsões acrescenta outra dimensão ao problema.
+Ouyang et al.~\cite{ouyang2024} combinam XGBoost e SHAP na análise de
+resultados da NBA, utilizando dados das temporadas de 2021 a 2023.
+Enquanto o primeiro produz previsões, o segundo estima a contribuição
+das variáveis para essas previsões. A disponibilização de código pelos
+autores constitui também um recurso para estudar a implementação.
+Para um treinador, identificar os fatores associados a uma probabilidade
+de vitória pode facilitar a interpretação do modelo. Essa explicação,
+porém, não demonstra o efeito causal de alterar um alinhamento ou a
+distribuição de minutos.
+
+A previsão durante a partida utiliza informação diferente da previsão
+pré-jogo. Kandhway~\cite{kandhway2025} analisa oito temporadas da NBA,
+de 2015/2016 a 2022/2023, recorrendo a aprendizagem supervisionada e SHAP.
+O estudo reporta aproximadamente 74\% de exatidão global, com valores
+entre cerca de 63\% e 90\% em diferentes estados do jogo. A importância
+das variáveis também se altera durante a partida. Estes resultados
+fundamentam uma possível extensão dinâmica do projeto, mas não devem
+ser comparados diretamente com previsões anteriores ao início do jogo,
+que dispõem de menos informação.
+
+A revisão sistemática de Li et al.~\cite{li2025}, que reúne 34 estudos
+numa janela de pesquisa centrada em 2019--2024, ajuda a enquadrar estas
+diferenças. Os autores salientam a preparação dos dados, a seleção de
+características e a necessidade de melhorar a validação e diversificar
+as competições estudadas. Valores elevados de exatidão, isoladamente,
+não permitem ordenar os métodos quando variam os dados, as entradas e
+os protocolos de avaliação. Para o presente trabalho, importa comparar
+modelos nas mesmas condições temporais e analisar também a qualidade
+das probabilidades que serão fornecidas ao planeador.
