@@ -1,2 +1,7 @@
 pandas
 jupyter
+numpy
+scikit-learn
+matplotlib
+joblib
+ortools

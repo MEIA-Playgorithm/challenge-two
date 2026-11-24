@@ -1,0 +1,136 @@
+{
+  "team_id": "1610612738",
+  "cutoff": "2026-04-01",
+  "target_wins": 2,
+  "expected_wins": 2.061671760791045,
+  "probability_target": 0.7709856335971721,
+  "max_total_minutes": 96,
+  "back_to_back_cap": 64,
+  "selection": {
+    "status": "OPTIMAL",
+    "selected": [
+      1,
+      1,
+      1
+    ],
+    "objective": 777.793,
+    "best_bound": 777.793,
+    "total_minutes": {
+      "1627759": 96,
+      "1628369": 96,
+      "1628401": 96,
+      "1629646": 0,
+      "1629674": 96,
+      "1630202": 96,
+      "1630568": 0,
+      "1630573": 96,
+      "1631199": 0,
+      "1631248": 96,
+      "1641775": 0,
+      "1642864": 0,
+      "1642873": 0,
+      "1642910": 0,
+      "1642917": 0,
+      "202696": 48
+    }
+  },
+  "fixtures": [
+    {
+      "game_id": "0022501106",
+      "game_date": "2026-04-01",
+      "home_team_id": "1610612748",
+      "away_team_id": "1610612738",
+      "season_start": 2025
+    },
+    {
+      "game_id": "0022501126",
+      "game_date": "2026-04-03",
+      "home_team_id": "1610612749",
+      "away_team_id": "1610612738",
+      "season_start": 2025
+    },
+    {
+      "game_id": "0022501132",
+      "game_date": "2026-04-05",
+      "home_team_id": "1610612738",
+      "away_team_id": "1610612761",
+      "season_start": 2025
+    }
+  ],
+  "candidate_summary": [
+    [
+      {
+        "cap": 36,
+        "status": "OPTIMAL",
+        "utility": 148.655
+      },
+      {
+        "cap": 32,
+        "status": "OPTIMAL",
+        "utility": 141.222
+      },
+      {
+        "cap": 28,
+        "status": "FEASIBLE",
+        "utility": 131.825
+      }
+    ],
+    [
+      {
+        "cap": 36,
+        "status": "OPTIMAL",
+        "utility": 148.655
+      },
+      {
+        "cap": 32,
+        "status": "OPTIMAL",
+        "utility": 141.222
+      },
+      {
+        "cap": 28,
+        "status": "FEASIBLE",
+        "utility": 131.825
+      }
+    ],
+    [
+      {
+        "cap": 36,
+        "status": "OPTIMAL",
+        "utility": 148.655
+      },
+      {
+        "cap": 32,
+        "status": "OPTIMAL",
+        "utility": 141.222
+      },
+      {
+        "cap": 28,
+        "status": "FEASIBLE",
+        "utility": 131.825
+      }
+    ]
+  ],
+  "model_trained_through": "2025-04-13",
+  "result_model_sha256": "9165ac539df8f1f94dc9fb7f9b856f57e01427cd7365d8a5ce310b36a4b50b92",
+  "source_provenance": {
+    "model_fit_end": "2025-04-13",
+    "lookback_days": 30,
+    "availability": "assumed; confirm or override before operational use",
+    "positions": "biography snapshot; not a verified historical position roster",
+    "input_sha256": {
+      "games.csv": "daee930e2cb72827b378a75ab9740cefcb57c4ea4a827f08a89c87442c407133",
+      "player_games.csv": "18a98121dfda3d665691e777dd78af2c58bec21c206bc66f9ed55f35616aaf84"
+    },
+    "model_sha256": {
+      "player_model.joblib": "8950ccf03f23dd3cbe399f781b58744e762e04df0fb5cff52d947e64b4ecedc1",
+      "lineup_model.joblib": "282231c558012e012dd5d17d40908d60370852b1b5bd85a1ca0fa4c3585d9a4a"
+    }
+  },
+  "assumptions": [
+    "Independent game outcomes for win-count distribution",
+    "Frozen pre-cutoff team performance and home-context player priorities",
+    "Historical calendar treated as known at cutoff; dates and teams only",
+    "Utility is not a causal effect on win probability",
+    "Optimal only among generated candidates; not a joint global rotation optimum"
+  ]
+}

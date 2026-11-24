@@ -21,6 +21,49 @@ notebooks/                analysis notebooks
 
 The notebook `01_data_overview` shows file sizes, row and column counts, sample rows, missing values and the years each source covers.
 
+## Prepare datasets for machine learning
+
+Run `python3 scripts/prepare_data.py` after extracting the CSV files.
+This creates shared game, team, player, injury and event tables in `data/processed/`.
+It also writes a quality report, a data dictionary and records that need review.
+The default scope covers regular seasons from 2019–20 through 2025–26.
+Read the [preparation guide](docs/DATA_PREPARATION.md) for commands, join keys and limitations.
+The [quality report](docs/DATA_QUALITY_REPORT.md) records the latest verified run.
+
+## Predict game results
+
+Element 2 compares logistic regression, Random Forest and gradient boosting with home-win and Elo references.
+It builds features from earlier days and evaluates a held-out season.
+Read the [prediction guide](docs/RESULT_PREDICTION.md) to train a model or predict a fixture.
+The [experiment report](reports/result_prediction/RESULTS.md) contains the measured results and figures.
+
+## Evaluate players and starting lineups
+
+Element 3 predicts player points, rebounds and assists from earlier appearances.
+It also evaluates starting-quintet associations with full-game point margins.
+Read the [evaluation guide](docs/PERFORMANCE_EVALUATION.md) for scope, commands and limitations.
+The [performance report](reports/performance/RESULTS.md) contains held-out results.
+
+## Plan starters and minutes
+
+Element 4 uses constraint programming to turn ML priorities into a feasible 48-minute rotation.
+Read the [planning guide](docs/ROTATION_PLANNING.md) to edit availability, positions and minute limits.
+The [example plan](reports/rotation/RESULTS.md) includes the starting five and minute allocation.
+
+## Plan substitutions with a Markov decision process
+
+Element 5 adapts the order of quarter rotations using a finite-horizon decision policy.
+It preserves the Element 4 minute budgets and compares policies under explicit simulation assumptions.
+Read the [substitution guide](docs/SUBSTITUTION_PLANNING.md) and the [experiment report](reports/substitutions/RESULTS.md).
+
+A [genetic algorithm comparison](docs/GENETIC_SUBSTITUTIONS.md) evaluates adaptive substitution policies against the exact MDP under the same constraints.
+
+## Plan goals across several games
+
+Element 6 integrates the earlier modules into a multi-game plan with win probabilities and shared minute budgets.
+Read the [integration guide](docs/HORIZON_PLANNING.md) and the [example horizon](reports/horizon/RESULTS.md).
+Run `.venv/bin/python scripts/plan_horizon.py` after preparing data and training the models.
+
 ## Get the data
 
 Run one of these commands from the repository folder after you clone it:

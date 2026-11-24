@@ -1,0 +1,172 @@
+{
+  "selected_model": "logistic_C0.1",
+  "selection_rule": "Minimum validation log loss among learned candidates",
+  "seed": 42,
+  "feature_version": "pregame-daily-v1",
+  "features": [
+    "diff_last5_win",
+    "diff_last5_points_for",
+    "diff_last5_points_against",
+    "diff_last5_margin",
+    "diff_last5_assists",
+    "diff_last5_rebounds",
+    "diff_last5_turnovers",
+    "diff_last5_fg_percentage",
+    "diff_last5_three_percentage",
+    "diff_last5_ft_percentage",
+    "diff_last5_effective_fg_percentage",
+    "diff_last5_offensive_rating",
+    "diff_last5_defensive_rating",
+    "diff_last10_win",
+    "diff_last10_points_for",
+    "diff_last10_points_against",
+    "diff_last10_margin",
+    "diff_last10_assists",
+    "diff_last10_rebounds",
+    "diff_last10_turnovers",
+    "diff_last10_fg_percentage",
+    "diff_last10_three_percentage",
+    "diff_last10_ft_percentage",
+    "diff_last10_effective_fg_percentage",
+    "diff_last10_offensive_rating",
+    "diff_last10_defensive_rating",
+    "diff_season_win",
+    "diff_season_points_for",
+    "diff_season_points_against",
+    "diff_season_margin",
+    "diff_season_assists",
+    "diff_season_rebounds",
+    "diff_season_turnovers",
+    "diff_season_fg_percentage",
+    "diff_season_three_percentage",
+    "diff_season_ft_percentage",
+    "diff_season_effective_fg_percentage",
+    "diff_season_offensive_rating",
+    "diff_season_defensive_rating",
+    "home_games_played",
+    "away_games_played",
+    "home_rest_days",
+    "away_rest_days",
+    "home_back_to_back",
+    "away_back_to_back",
+    "elo_difference"
+  ],
+  "splits": {
+    "train": {
+      "games": 5829,
+      "first_date": "2019-10-22",
+      "last_date": "2024-04-14"
+    },
+    "validation": {
+      "games": 1224,
+      "first_date": "2024-10-22",
+      "last_date": "2025-04-13"
+    },
+    "test": {
+      "games": 1230,
+      "first_date": "2025-10-21",
+      "last_date": "2026-04-12"
+    }
+  },
+  "validation": {
+    "home_prior": {
+      "accuracy": 0.5441176470588235,
+      "log_loss": 0.6894000367190117,
+      "brier_score": 0.24812821072511104,
+      "roc_auc": 0.5
+    },
+    "elo": {
+      "accuracy": 0.6519607843137255,
+      "log_loss": 0.6183565324785809,
+      "brier_score": 0.21515485335620954,
+      "roc_auc": 0.713218594939025
+    },
+    "logistic_C0.1": {
+      "accuracy": 0.6772875816993464,
+      "log_loss": 0.6032142642873427,
+      "brier_score": 0.20851207178841036,
+      "roc_auc": 0.7296624581570819
+    },
+    "logistic_C1": {
+      "accuracy": 0.6740196078431373,
+      "log_loss": 0.6037660750091977,
+      "brier_score": 0.20874225026557924,
+      "roc_auc": 0.7290946860839335
+    },
+    "logistic_C10": {
+      "accuracy": 0.673202614379085,
+      "log_loss": 0.604095188441337,
+      "brier_score": 0.20888280342086607,
+      "roc_auc": 0.7289009439547074
+    },
+    "random_forest": {
+      "accuracy": 0.6601307189542484,
+      "log_loss": 0.6135191166685232,
+      "brier_score": 0.2127783467890813,
+      "roc_auc": 0.7182908715166779
+    },
+    "gradient_boosting_l2_1": {
+      "accuracy": 0.6552287581699346,
+      "log_loss": 0.617984420541467,
+      "brier_score": 0.2147306514505313,
+      "roc_auc": 0.7115529508002626
+    },
+    "gradient_boosting_l2_10": {
+      "accuracy": 0.6633986928104575,
+      "log_loss": 0.6122540749953893,
+      "brier_score": 0.21212961658156337,
+      "roc_auc": 0.7196336121067305
+    }
+  },
+  "test": {
+    "logistic_C0.1": {
+      "accuracy": 0.6715447154471544,
+      "log_loss": 0.6034176434088179,
+      "brier_score": 0.208063220369686,
+      "roc_auc": 0.7286854892223388
+    },
+    "home_prior": {
+      "accuracy": 0.5544715447154471,
+      "log_loss": 0.6872220117816097,
+      "brier_score": 0.24704319835810748,
+      "roc_auc": 0.5
+    },
+    "elo": {
+      "accuracy": 0.6780487804878049,
+      "log_loss": 0.6079548061862972,
+      "brier_score": 0.2095868756896711,
+      "roc_auc": 0.7259536143159877
+    }
+  },
+  "packages": {
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "joblib": "1.6.0",
+    "matplotlib": "3.11.2"
+  },
+  "input_sha256": {
+    "games.csv": "daee930e2cb72827b378a75ab9740cefcb57c4ea4a827f08a89c87442c407133",
+    "team_games.csv": "8a5b307f9a338ab9e1a66d61ce59b9d8f36e3675303b398806d991586457bdf1",
+    "quality_report.json": "fd3a13bfb717763386c7a1d562ae3bfe8d1491fd710d3a2f3fbfbbcf4c57b6ef"
+  },
+  "candidate_parameters": {
+    "logistic_C0.1": "Pipeline(steps=[('simpleimputer',\n                 SimpleImputer(add_indicator=True, keep_empty_features=True,\n                               strategy='median')),\n                ('standardscaler', StandardScaler()),\n                ('logisticregression',\n                 LogisticRegression(C=0.1, max_iter=2000, random_state=42))])",
+    "logistic_C1": "Pipeline(steps=[('simpleimputer',\n                 SimpleImputer(add_indicator=True, keep_empty_features=True,\n                               strategy='median')),\n                ('standardscaler', StandardScaler()),\n                ('logisticregression',\n                 LogisticRegression(max_iter=2000, random_state=42))])",
+    "logistic_C10": "Pipeline(steps=[('simpleimputer',\n                 SimpleImputer(add_indicator=True, keep_empty_features=True,\n                               strategy='median')),\n                ('standardscaler', StandardScaler()),\n                ('logisticregression',\n                 LogisticRegression(C=10.0, max_iter=2000, random_state=42))])",
+    "random_forest": "Pipeline(steps=[('simpleimputer',\n                 SimpleImputer(add_indicator=True, keep_empty_features=True,\n                               strategy='median')),\n                ('randomforestclassifier',\n                 RandomForestClassifier(max_depth=10, min_samples_leaf=15,\n                                        n_estimators=300, n_jobs=2,\n                                        random_state=42))])",
+    "gradient_boosting_l2_1": "Pipeline(steps=[('simpleimputer',\n                 SimpleImputer(add_indicator=True, keep_empty_features=True,\n                               strategy='median')),\n                ('histgradientboostingclassifier',\n                 HistGradientBoostingClassifier(early_stopping=False,\n                                                l2_regularization=1.0,\n                                                learning_rate=0.05, max_depth=3,\n                                                max_iter=200,\n                                                random_state=42))])",
+    "gradient_boosting_l2_10": "Pipeline(steps=[('simpleimputer',\n                 SimpleImputer(add_indicator=True, keep_empty_features=True,\n                               strategy='median')),\n                ('histgradientboostingclassifier',\n                 HistGradientBoostingClassifier(early_stopping=False,\n                                                l2_regularization=10.0,\n                                                learning_rate=0.05, max_depth=3,\n                                                max_iter=200,\n                                                random_state=42))])"
+  },
+  "input_directory": "data/prediction_input",
+  "verified_final_input_sha256": {
+    "games.csv": "daee930e2cb72827b378a75ab9740cefcb57c4ea4a827f08a89c87442c407133",
+    "team_games.csv": "8a5b307f9a338ab9e1a66d61ce59b9d8f36e3675303b398806d991586457bdf1"
+  },
+  "checks": {
+    "temporal_feature_and_preparation_tests": "6 passed",
+    "saved_model_predictions": "Match probabilities evaluated on the complete test set",
+    "fixture_prediction": "Matches held-out probability for game 0022500001",
+    "final_prepared_inputs": "Byte-identical to the game and team files used for training"
+  }
+}

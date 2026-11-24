@@ -1,0 +1,78 @@
+{
+  "expected_utility": {
+    "mdp": 131.7743815943359,
+    "fixed": 131.7743815943359,
+    "greedy": 131.7743815943359
+  },
+  "comparisons": {
+    "fixed": {
+      "mean_utility_gain": 0.0,
+      "monte_carlo_se": 0.0,
+      "monte_carlo_95_interval": [
+        0.0,
+        0.0
+      ]
+    },
+    "greedy": {
+      "mean_utility_gain": 0.0,
+      "monte_carlo_se": 0.0,
+      "monte_carlo_95_interval": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "episodes": 500,
+  "seed": 42,
+  "policy_states": 46,
+  "transition": [
+    [
+      0.6,
+      0.2,
+      0.2
+    ],
+    [
+      0.2,
+      0.6,
+      0.2
+    ],
+    [
+      0.2,
+      0.2,
+      0.6
+    ]
+  ],
+  "fatigue": 0.08,
+  "substitution_cost": 0.15,
+  "sensitivity": [
+    {
+      "persistence": 0.3,
+      "fatigue": 0.0,
+      "mdp": 141.20484244697406,
+      "fixed": 141.17875923746487
+    },
+    {
+      "persistence": 0.3,
+      "fatigue": 0.16,
+      "mdp": 123.0273894976508,
+      "fixed": 123.0273894976508
+    },
+    {
+      "persistence": 0.8,
+      "fatigue": 0.0,
+      "mdp": 140.02829730405313,
+      "fixed": 140.02319779373013
+    },
+    {
+      "persistence": 0.8,
+      "fatigue": 0.16,
+      "mdp": 122.01518954619668,
+      "fixed": 122.01518954619668
+    }
+  ],
+  "scope": "Synthetic context transitions and utility; no real-game win claim",
+  "source_sha256": {
+    "inputs.json": "8be5e76d35c58e97296d34f844481651f78b03b4c638f042bfffec5f9771178c",
+    "solution.json": "b968b87936140a3f891d52fc4443584a3feba30ef7f0aa05b40b9ed91d40dbbe"
+  }
+}

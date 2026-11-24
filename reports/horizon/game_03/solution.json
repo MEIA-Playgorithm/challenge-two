@@ -1,0 +1,272 @@
+{
+  "status": "OPTIMAL",
+  "wall_time_seconds": 0.310958122,
+  "score_definition": "Weighted predicted production times minute share plus starting-five association; planning utility, not predicted points or wins",
+  "objective": 141.222,
+  "best_bound": 141.222,
+  "schedule": [
+    {
+      "block": 0,
+      "quarter": 1,
+      "start_minute": 0,
+      "end_minute": 4,
+      "G1": "1630202",
+      "G2": "1628401",
+      "F1": "1627759",
+      "F2": "1628369",
+      "C": "202696"
+    },
+    {
+      "block": 1,
+      "quarter": 1,
+      "start_minute": 4,
+      "end_minute": 8,
+      "G1": "1631248",
+      "G2": "1628401",
+      "F1": "1627759",
+      "F2": "1630573",
+      "C": "1629674"
+    },
+    {
+      "block": 2,
+      "quarter": 1,
+      "start_minute": 8,
+      "end_minute": 12,
+      "G1": "1630202",
+      "G2": "1631248",
+      "F1": "1630573",
+      "F2": "1628369",
+      "C": "1629674"
+    },
+    {
+      "block": 3,
+      "quarter": 2,
+      "start_minute": 12,
+      "end_minute": 16,
+      "G1": "1630202",
+      "G2": "1628401",
+      "F1": "1628369",
+      "F2": "1627759",
+      "C": "1629674"
+    },
+    {
+      "block": 4,
+      "quarter": 2,
+      "start_minute": 16,
+      "end_minute": 20,
+      "G1": "1630202",
+      "G2": "1631248",
+      "F1": "1630573",
+      "F2": "1628369",
+      "C": "202696"
+    },
+    {
+      "block": 5,
+      "quarter": 2,
+      "start_minute": 20,
+      "end_minute": 24,
+      "G1": "1631248",
+      "G2": "1628401",
+      "F1": "1627759",
+      "F2": "1630573",
+      "C": "202696"
+    },
+    {
+      "block": 6,
+      "quarter": 3,
+      "start_minute": 24,
+      "end_minute": 28,
+      "G1": "1628401",
+      "G2": "1631248",
+      "F1": "1628369",
+      "F2": "1630573",
+      "C": "1629674"
+    },
+    {
+      "block": 7,
+      "quarter": 3,
+      "start_minute": 28,
+      "end_minute": 32,
+      "G1": "1630202",
+      "G2": "1628401",
+      "F1": "1628369",
+      "F2": "1627759",
+      "C": "1629674"
+    },
+    {
+      "block": 8,
+      "quarter": 3,
+      "start_minute": 32,
+      "end_minute": 36,
+      "G1": "1630202",
+      "G2": "1631248",
+      "F1": "1627759",
+      "F2": "1628369",
+      "C": "202696"
+    },
+    {
+      "block": 9,
+      "quarter": 4,
+      "start_minute": 36,
+      "end_minute": 40,
+      "G1": "1631248",
+      "G2": "1628401",
+      "F1": "1630573",
+      "F2": "1627759",
+      "C": "1629674"
+    },
+    {
+      "block": 10,
+      "quarter": 4,
+      "start_minute": 40,
+      "end_minute": 44,
+      "G1": "1630202",
+      "G2": "1631248",
+      "F1": "1630573",
+      "F2": "1628369",
+      "C": "1629674"
+    },
+    {
+      "block": 11,
+      "quarter": 4,
+      "start_minute": 44,
+      "end_minute": 48,
+      "G1": "1628401",
+      "G2": "1630202",
+      "F1": "1630573",
+      "F2": "1627759",
+      "C": "1629674"
+    }
+  ],
+  "players": [
+    {
+      "player_id": "1627759",
+      "name": "Jaylen Brown",
+      "minutes": 32,
+      "starter": true,
+      "utility": 45.22993488789998,
+      "starter_association": 1.8121980440038383
+    },
+    {
+      "player_id": "1628369",
+      "name": "Jayson Tatum",
+      "minutes": 32,
+      "starter": true,
+      "utility": 37.33827109152907,
+      "starter_association": 3.3060528120892063
+    },
+    {
+      "player_id": "1628401",
+      "name": "Derrick White",
+      "minutes": 32,
+      "starter": true,
+      "utility": 26.913323394632123,
+      "starter_association": 2.96936114661595
+    },
+    {
+      "player_id": "1629646",
+      "name": "Charles Bassey",
+      "minutes": 0,
+      "starter": false,
+      "utility": 6.80412113412933,
+      "starter_association": -0.38008814615390574
+    },
+    {
+      "player_id": "1629674",
+      "name": "Neemias Queta",
+      "minutes": 32,
+      "starter": false,
+      "utility": 22.013113631055084,
+      "starter_association": 0.15527240667380027
+    },
+    {
+      "player_id": "1630202",
+      "name": "Payton Pritchard",
+      "minutes": 32,
+      "starter": true,
+      "utility": 28.538194330294296,
+      "starter_association": 0.35070504893558146
+    },
+    {
+      "player_id": "1630568",
+      "name": "Luka Garza",
+      "minutes": 0,
+      "starter": false,
+      "utility": 16.478895032364836,
+      "starter_association": 0.0
+    },
+    {
+      "player_id": "1630573",
+      "name": "Sam Hauser",
+      "minutes": 32,
+      "starter": false,
+      "utility": 12.591120449747034,
+      "starter_association": 1.0659004366986908
+    },
+    {
+      "player_id": "1631199",
+      "name": "Ron Harper Jr.",
+      "minutes": 0,
+      "starter": false,
+      "utility": 6.207276148076012,
+      "starter_association": 0.0
+    },
+    {
+      "player_id": "1631248",
+      "name": "Baylor Scheierman",
+      "minutes": 32,
+      "starter": false,
+      "utility": 16.13769635122453,
+      "starter_association": -0.12509676669298259
+    },
+    {
+      "player_id": "1641775",
+      "name": "Jordan Walsh",
+      "minutes": 0,
+      "starter": false,
+      "utility": 10.893605324286893,
+      "starter_association": 0.17675770552329986
+    },
+    {
+      "player_id": "1642864",
+      "name": "Hugo Gonzalez",
+      "minutes": 0,
+      "starter": false,
+      "utility": 8.099035039757267,
+      "starter_association": 0.0
+    },
+    {
+      "player_id": "1642873",
+      "name": "Amari Williams",
+      "minutes": 0,
+      "starter": false,
+      "utility": 5.760689983425839,
+      "starter_association": 0.0
+    },
+    {
+      "player_id": "1642910",
+      "name": "John Tonje",
+      "minutes": 0,
+      "starter": false,
+      "utility": 3.0420975274194353,
+      "starter_association": 0.0
+    },
+    {
+      "player_id": "1642917",
+      "name": "Max Shulga",
+      "minutes": 0,
+      "starter": false,
+      "utility": 3.1632304011197308,
+      "starter_association": 0.0
+    },
+    {
+      "player_id": "202696",
+      "name": "Nikola Vucevic",
+      "minutes": 16,
+      "starter": true,
+      "utility": 18.41200533984992,
+      "starter_association": 0.8076498486165419
+    }
+  ],
+  "constraints_verified": true
+}
