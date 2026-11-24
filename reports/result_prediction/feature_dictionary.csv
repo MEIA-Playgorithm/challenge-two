@@ -1,0 +1,47 @@
+feature,description,cutoff
+diff_last5_win,"Home minus away mean win, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_points_for,"Home minus away mean points_for, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_points_against,"Home minus away mean points_against, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_margin,"Home minus away mean margin, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_assists,"Home minus away mean assists, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_rebounds,"Home minus away mean rebounds, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_turnovers,"Home minus away mean turnovers, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_fg_percentage,"Home minus away mean fg_percentage, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_three_percentage,"Home minus away mean three_percentage, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_ft_percentage,"Home minus away mean ft_percentage, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_effective_fg_percentage,"Home minus away mean effective_fg_percentage, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_offensive_rating,"Home minus away mean offensive_rating, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last5_defensive_rating,"Home minus away mean defensive_rating, using last 5 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_win,"Home minus away mean win, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_points_for,"Home minus away mean points_for, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_points_against,"Home minus away mean points_against, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_margin,"Home minus away mean margin, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_assists,"Home minus away mean assists, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_rebounds,"Home minus away mean rebounds, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_turnovers,"Home minus away mean turnovers, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_fg_percentage,"Home minus away mean fg_percentage, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_three_percentage,"Home minus away mean three_percentage, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_ft_percentage,"Home minus away mean ft_percentage, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_effective_fg_percentage,"Home minus away mean effective_fg_percentage, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_offensive_rating,"Home minus away mean offensive_rating, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_last10_defensive_rating,"Home minus away mean defensive_rating, using last 10 games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_win,"Home minus away mean win, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_points_for,"Home minus away mean points_for, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_points_against,"Home minus away mean points_against, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_margin,"Home minus away mean margin, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_assists,"Home minus away mean assists, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_rebounds,"Home minus away mean rebounds, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_turnovers,"Home minus away mean turnovers, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_fg_percentage,"Home minus away mean fg_percentage, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_three_percentage,"Home minus away mean three_percentage, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_ft_percentage,"Home minus away mean ft_percentage, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_effective_fg_percentage,"Home minus away mean effective_fg_percentage, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_offensive_rating,"Home minus away mean offensive_rating, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+diff_season_defensive_rating,"Home minus away mean defensive_rating, using all earlier games in the same season.",Earlier source calendar days only; no current-day results.
+home_games_played,Number of earlier games for this team in the current season.,Earlier source calendar days only; no current-day results.
+away_games_played,Number of earlier games for this team in the current season.,Earlier source calendar days only; no current-day results.
+home_rest_days,"Calendar days since the last game, capped at 14; empty without history.",Earlier source calendar days only; no current-day results.
+away_rest_days,"Calendar days since the last game, capped at 14; empty without history.",Earlier source calendar days only; no current-day results.
+home_back_to_back,"1 if this team played on the previous day, 0 otherwise; empty without history.",Earlier source calendar days only; no current-day results.
+away_back_to_back,"1 if this team played on the previous day, 0 otherwise; empty without history.",Earlier source calendar days only; no current-day results.
+elo_difference,"Home minus away Elo before this day; K=20, home advantage=65, season retention=0.75.",Earlier source calendar days only; no current-day results.

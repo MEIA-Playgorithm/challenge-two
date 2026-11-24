@@ -1,0 +1,100 @@
+{
+  "expected_utility": {
+    "ga": 131.7743815943359,
+    "mdp": 131.7743815943359,
+    "fixed": 131.7743815943359,
+    "greedy": 131.7743815943359
+  },
+  "ga_gap_to_exact": 0.0,
+  "selected_seed": 42,
+  "runs": [
+    {
+      "seed": 42,
+      "fitness": 131.7743815943359,
+      "seconds": 0.09568087099614786,
+      "unique_evaluations": 8
+    },
+    {
+      "seed": 43,
+      "fitness": 131.7743815943359,
+      "seconds": 0.10204716300358996,
+      "unique_evaluations": 8
+    },
+    {
+      "seed": 44,
+      "fitness": 131.7743815943359,
+      "seconds": 0.10408204099803697,
+      "unique_evaluations": 8
+    },
+    {
+      "seed": 45,
+      "fitness": 131.7743815943359,
+      "seconds": 0.09342683899740223,
+      "unique_evaluations": 8
+    },
+    {
+      "seed": 46,
+      "fitness": 131.7743815943359,
+      "seconds": 0.09760573700623354,
+      "unique_evaluations": 8
+    }
+  ],
+  "state_count": 46,
+  "states_with_choice": 3,
+  "population": 40,
+  "generations": 40,
+  "mutation": 0.1,
+  "episodes": 500,
+  "simulation_seed": 10042,
+  "transition": [
+    [
+      0.6,
+      0.2,
+      0.2
+    ],
+    [
+      0.2,
+      0.6,
+      0.2
+    ],
+    [
+      0.2,
+      0.2,
+      0.6
+    ]
+  ],
+  "fatigue": 0.08,
+  "substitution_cost": 0.15,
+  "graph_seconds": 0.0012784329956048168,
+  "mdp_solve_seconds": 0.0013061599966022186,
+  "paired_comparisons": {
+    "mdp": {
+      "mean_ga_minus_baseline": 0.0,
+      "monte_carlo_se": 0.0,
+      "monte_carlo_95_interval": [
+        0.0,
+        0.0
+      ]
+    },
+    "fixed": {
+      "mean_ga_minus_baseline": 0.0,
+      "monte_carlo_se": 0.0,
+      "monte_carlo_95_interval": [
+        0.0,
+        0.0
+      ]
+    },
+    "greedy": {
+      "mean_ga_minus_baseline": 0.0,
+      "monte_carlo_se": 0.0,
+      "monte_carlo_95_interval": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "source_sha256": {
+    "inputs.json": "8be5e76d35c58e97296d34f844481651f78b03b4c638f042bfffec5f9771178c",
+    "solution.json": "b968b87936140a3f891d52fc4443584a3feba30ef7f0aa05b40b9ed91d40dbbe"
+  }
+}

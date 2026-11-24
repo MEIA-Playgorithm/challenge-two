@@ -1,0 +1,341 @@
+{
+  "team_id": "1610612738",
+  "date": "2026-04-01",
+  "home": false,
+  "block_minutes": 4,
+  "min_rotation": 8,
+  "max_rotation": 10,
+  "max_consecutive_blocks": 3,
+  "weights": {
+    "points": 1.0,
+    "rebounds_total": 1.2,
+    "assists": 1.5
+  },
+  "starter_weight": 1.0,
+  "players": [
+    {
+      "player_id": "1627759",
+      "name": "Jaylen Brown",
+      "roles": [
+        "G",
+        "F"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 27.22895559036507,
+        "rebounds_total": 6.731563706557891,
+        "assists": 6.615401899776957
+      },
+      "starter_association": 1.8121980440038383,
+      "starter_known": true,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1628369",
+      "name": "Jayson Tatum",
+      "roles": [
+        "G",
+        "F"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 21.615652610948214,
+        "rebounds_total": 8.0885354292406,
+        "assists": 4.010917310328091
+      },
+      "starter_association": 3.3060528120892063,
+      "starter_known": true,
+      "last_record_date": "2026-03-29"
+    },
+    {
+      "player_id": "1628401",
+      "name": "Derrick White",
+      "roles": [
+        "G"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 15.16647152488277,
+        "rebounds_total": 4.774324545618134,
+        "assists": 4.011774943338395
+      },
+      "starter_association": 2.96936114661595,
+      "starter_known": true,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1629646",
+      "name": "Charles Bassey",
+      "roles": [
+        "F",
+        "C"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 2.76314068304724,
+        "rebounds_total": 2.887242536681641,
+        "assists": 0.38419293804274757
+      },
+      "starter_association": -0.38008814615390574,
+      "starter_known": true,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1629674",
+      "name": "Neemias Queta",
+      "roles": [
+        "C"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 9.610569242796068,
+        "rebounds_total": 7.675413523196166,
+        "assists": 2.128032106949077
+      },
+      "starter_association": 0.15527240667380027,
+      "starter_known": true,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1630202",
+      "name": "Payton Pritchard",
+      "roles": [
+        "G"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 18.30682175044538,
+        "rebounds_total": 3.758212016635811,
+        "assists": 3.8143454399239625
+      },
+      "starter_association": 0.35070504893558146,
+      "starter_known": true,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1630568",
+      "name": "Luka Garza",
+      "roles": [
+        "C"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 9.3295462114058,
+        "rebounds_total": 4.423905318785663,
+        "assists": 1.2271082922774939
+      },
+      "starter_association": 0.0,
+      "starter_known": false,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1630573",
+      "name": "Sam Hauser",
+      "roles": [
+        "F"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 7.133798994453473,
+        "rebounds_total": 3.3407800640710112,
+        "assists": 0.9655902522722324
+      },
+      "starter_association": 1.0659004366986908,
+      "starter_known": true,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1631199",
+      "name": "Ron Harper Jr.",
+      "roles": [
+        "G",
+        "F"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 3.680912648294269,
+        "rebounds_total": 1.4933936482791115,
+        "assists": 0.48952741456453963
+      },
+      "starter_association": 0.0,
+      "starter_known": false,
+      "last_record_date": "2026-03-29"
+    },
+    {
+      "player_id": "1631248",
+      "name": "Baylor Scheierman",
+      "roles": [
+        "G"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 7.137267234106939,
+        "rebounds_total": 4.5775199848601185,
+        "assists": 2.3382700901903
+      },
+      "starter_association": -0.12509676669298259,
+      "starter_known": true,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1641775",
+      "name": "Jordan Walsh",
+      "roles": [
+        "G"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 5.0305975445944435,
+        "rebounds_total": 3.835844562064077,
+        "assists": 0.8399962034770383
+      },
+      "starter_association": 0.17675770552329986,
+      "starter_known": true,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1642864",
+      "name": "Hugo Gonzalez",
+      "roles": [
+        "G"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 3.7090921684048155,
+        "rebounds_total": 3.013079330602788,
+        "assists": 0.5161651164194041
+      },
+      "starter_association": 0.0,
+      "starter_known": false,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1642873",
+      "name": "Amari Williams",
+      "roles": [
+        "F",
+        "C"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 1.9504492141583345,
+        "rebounds_total": 2.2987008449307487,
+        "assists": 0.701199836900404
+      },
+      "starter_association": 0.0,
+      "starter_known": false,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1642910",
+      "name": "John Tonje",
+      "roles": [
+        "G"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 1.1816719280616788,
+        "rebounds_total": 0.9837308202800656,
+        "assists": 0.4532990766811187
+      },
+      "starter_association": 0.0,
+      "starter_known": false,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "1642917",
+      "name": "Max Shulga",
+      "roles": [
+        "G"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 1.4696172566259254,
+        "rebounds_total": 0.7664617131131357,
+        "assists": 0.5159060591720284
+      },
+      "starter_association": 0.0,
+      "starter_known": false,
+      "last_record_date": "2026-03-30"
+    },
+    {
+      "player_id": "202696",
+      "name": "Nikola Vucevic",
+      "roles": [
+        "C"
+      ],
+      "available": true,
+      "min_minutes": 8,
+      "max_minutes": 32,
+      "force_starter": false,
+      "predictions": {
+        "points": 9.494782510592314,
+        "rebounds_total": 5.657381225216246,
+        "assists": 1.418910239332074
+      },
+      "starter_association": 0.8076498486165419,
+      "starter_known": true,
+      "last_record_date": "2026-03-06"
+    }
+  ],
+  "excluded_candidates": [],
+  "provenance": {
+    "model_fit_end": "2025-04-13",
+    "lookback_days": 30,
+    "availability": "assumed; confirm or override before operational use",
+    "positions": "biography snapshot; not a verified historical position roster",
+    "input_sha256": {
+      "games.csv": "daee930e2cb72827b378a75ab9740cefcb57c4ea4a827f08a89c87442c407133",
+      "player_games.csv": "18a98121dfda3d665691e777dd78af2c58bec21c206bc66f9ed55f35616aaf84"
+    },
+    "model_sha256": {
+      "player_model.joblib": "8950ccf03f23dd3cbe399f781b58744e762e04df0fb5cff52d947e64b4ecedc1",
+      "lineup_model.joblib": "282231c558012e012dd5d17d40908d60370852b1b5bd85a1ca0fa4c3585d9a4a"
+    }
+  }
+}

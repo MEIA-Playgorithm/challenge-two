@@ -1,0 +1,1503 @@
+{
+  "player_order": [
+    "1627759",
+    "1628369",
+    "1628401",
+    "1629646",
+    "1629674",
+    "1630202",
+    "1630568",
+    "1630573",
+    "1631199",
+    "1631248",
+    "1641775",
+    "1642864",
+    "1642873",
+    "1642910",
+    "1642917",
+    "202696"
+  ],
+  "player_names": {
+    "1627759": "Jaylen Brown",
+    "1628369": "Jayson Tatum",
+    "1628401": "Derrick White",
+    "1629646": "Charles Bassey",
+    "1629674": "Neemias Queta",
+    "1630202": "Payton Pritchard",
+    "1630568": "Luka Garza",
+    "1630573": "Sam Hauser",
+    "1631199": "Ron Harper Jr.",
+    "1631248": "Baylor Scheierman",
+    "1641775": "Jordan Walsh",
+    "1642864": "Hugo Gonzalez",
+    "1642873": "Amari Williams",
+    "1642910": "John Tonje",
+    "1642917": "Max Shulga",
+    "202696": "Nikola Vucevic"
+  },
+  "action_blocks": [
+    {
+      "block": 0,
+      "quarter": 1,
+      "start_minute": 0,
+      "end_minute": 4,
+      "G1": "1628401",
+      "G2": "1628369",
+      "F1": "1627759",
+      "F2": "1630573",
+      "C": "202696"
+    },
+    {
+      "block": 1,
+      "quarter": 1,
+      "start_minute": 4,
+      "end_minute": 8,
+      "G1": "1630202",
+      "G2": "1628401",
+      "F1": "1627759",
+      "F2": "1630573",
+      "C": "1629674"
+    },
+    {
+      "block": 2,
+      "quarter": 1,
+      "start_minute": 8,
+      "end_minute": 12,
+      "G1": "1630202",
+      "G2": "1628401",
+      "F1": "1628369",
+      "F2": "1630573",
+      "C": "1629674"
+    },
+    {
+      "block": 3,
+      "quarter": 2,
+      "start_minute": 12,
+      "end_minute": 16,
+      "G1": "1630202",
+      "G2": "1631248",
+      "F1": "1628369",
+      "F2": "1627759",
+      "C": "1629674"
+    },
+    {
+      "block": 4,
+      "quarter": 2,
+      "start_minute": 16,
+      "end_minute": 20,
+      "G1": "1628401",
+      "G2": "1631248",
+      "F1": "1627759",
+      "F2": "1630573",
+      "C": "202696"
+    },
+    {
+      "block": 5,
+      "quarter": 2,
+      "start_minute": 20,
+      "end_minute": 24,
+      "G1": "1630202",
+      "G2": "1631248",
+      "F1": "1628369",
+      "F2": "1630573",
+      "C": "1629674"
+    },
+    {
+      "block": 6,
+      "quarter": 3,
+      "start_minute": 24,
+      "end_minute": 28,
+      "G1": "1630202",
+      "G2": "1628401",
+      "F1": "1628369",
+      "F2": "1627759",
+      "C": "1629674"
+    },
+    {
+      "block": 7,
+      "quarter": 3,
+      "start_minute": 28,
+      "end_minute": 32,
+      "G1": "1630202",
+      "G2": "1628401",
+      "F1": "1628369",
+      "F2": "1627759",
+      "C": "1629674"
+    },
+    {
+      "block": 8,
+      "quarter": 3,
+      "start_minute": 32,
+      "end_minute": 36,
+      "G1": "1628401",
+      "G2": "1631248",
+      "F1": "1630573",
+      "F2": "1627759",
+      "C": "202696"
+    },
+    {
+      "block": 9,
+      "quarter": 4,
+      "start_minute": 36,
+      "end_minute": 40,
+      "G1": "1631248",
+      "G2": "1630202",
+      "F1": "1630573",
+      "F2": "1628369",
+      "C": "1629674"
+    },
+    {
+      "block": 10,
+      "quarter": 4,
+      "start_minute": 40,
+      "end_minute": 44,
+      "G1": "1628401",
+      "G2": "1630202",
+      "F1": "1628369",
+      "F2": "1627759",
+      "C": "1629674"
+    },
+    {
+      "block": 11,
+      "quarter": 4,
+      "start_minute": 44,
+      "end_minute": 48,
+      "G1": "1628401",
+      "G2": "1630202",
+      "F1": "1628369",
+      "F2": "1627759",
+      "C": "1629674"
+    }
+  ],
+  "states": [
+    {
+      "block": 0,
+      "remaining": [
+        0,
+        1,
+        2
+      ],
+      "streak": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": -1,
+      "context": "balanced",
+      "action": 0,
+      "value": 131.7743815943359
+    },
+    {
+      "block": 1,
+      "remaining": [
+        1,
+        2
+      ],
+      "streak": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 0,
+      "context": "balanced",
+      "action": 1,
+      "value": 119.60750157557936
+    },
+    {
+      "block": 1,
+      "remaining": [
+        1,
+        2
+      ],
+      "streak": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 0,
+      "context": "playmaking",
+      "action": 1,
+      "value": 120.48990694701803
+    },
+    {
+      "block": 1,
+      "remaining": [
+        1,
+        2
+      ],
+      "streak": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 0,
+      "context": "rebounding",
+      "action": 1,
+      "value": 121.02422331306576
+    },
+    {
+      "block": 2,
+      "remaining": [
+        1
+      ],
+      "streak": [
+        0,
+        2,
+        2,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 2,
+      "context": "balanced",
+      "action": 1,
+      "value": 109.0368949665739
+    },
+    {
+      "block": 2,
+      "remaining": [
+        1
+      ],
+      "streak": [
+        0,
+        2,
+        2,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 2,
+      "context": "playmaking",
+      "action": 1,
+      "value": 109.94014692022702
+    },
+    {
+      "block": 2,
+      "remaining": [
+        1
+      ],
+      "streak": [
+        0,
+        2,
+        2,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 2,
+      "context": "rebounding",
+      "action": 1,
+      "value": 110.44099552295827
+    },
+    {
+      "block": 2,
+      "remaining": [
+        2
+      ],
+      "streak": [
+        2,
+        0,
+        2,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 1,
+      "context": "balanced",
+      "action": 2,
+      "value": 108.7440313826198
+    },
+    {
+      "block": 2,
+      "remaining": [
+        2
+      ],
+      "streak": [
+        2,
+        0,
+        2,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 1,
+      "context": "playmaking",
+      "action": 2,
+      "value": 109.56606787166396
+    },
+    {
+      "block": 2,
+      "remaining": [
+        2
+      ],
+      "streak": [
+        2,
+        0,
+        2,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 1,
+      "context": "rebounding",
+      "action": 2,
+      "value": 110.1947890271042
+    },
+    {
+      "block": 3,
+      "remaining": [
+        3,
+        4,
+        5
+      ],
+      "streak": [
+        0,
+        1,
+        3,
+        0,
+        2,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 2,
+      "context": "balanced",
+      "action": 3,
+      "value": 98.65658454901458
+    },
+    {
+      "block": 3,
+      "remaining": [
+        3,
+        4,
+        5
+      ],
+      "streak": [
+        0,
+        1,
+        3,
+        0,
+        2,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 2,
+      "context": "playmaking",
+      "action": 3,
+      "value": 99.57343482014463
+    },
+    {
+      "block": 3,
+      "remaining": [
+        3,
+        4,
+        5
+      ],
+      "streak": [
+        0,
+        1,
+        3,
+        0,
+        2,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 2,
+      "context": "rebounding",
+      "action": 3,
+      "value": 100.1647987603902
+    },
+    {
+      "block": 3,
+      "remaining": [
+        3,
+        4,
+        5
+      ],
+      "streak": [
+        1,
+        0,
+        3,
+        0,
+        2,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 1,
+      "context": "balanced",
+      "action": 3,
+      "value": 98.2953221761294
+    },
+    {
+      "block": 3,
+      "remaining": [
+        3,
+        4,
+        5
+      ],
+      "streak": [
+        1,
+        0,
+        3,
+        0,
+        2,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 1,
+      "context": "playmaking",
+      "action": 3,
+      "value": 99.1981707263278
+    },
+    {
+      "block": 3,
+      "remaining": [
+        3,
+        4,
+        5
+      ],
+      "streak": [
+        1,
+        0,
+        3,
+        0,
+        2,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 1,
+      "context": "rebounding",
+      "action": 3,
+      "value": 99.79997464414517
+    },
+    {
+      "block": 4,
+      "remaining": [
+        4,
+        5
+      ],
+      "streak": [
+        1,
+        2,
+        0,
+        0,
+        3,
+        3,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 3,
+      "context": "balanced",
+      "action": 4,
+      "value": 86.9953922767667
+    },
+    {
+      "block": 4,
+      "remaining": [
+        4,
+        5
+      ],
+      "streak": [
+        1,
+        2,
+        0,
+        0,
+        3,
+        3,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 3,
+      "context": "playmaking",
+      "action": 4,
+      "value": 87.81790853335492
+    },
+    {
+      "block": 4,
+      "remaining": [
+        4,
+        5
+      ],
+      "streak": [
+        1,
+        2,
+        0,
+        0,
+        3,
+        3,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 3,
+      "context": "rebounding",
+      "action": 4,
+      "value": 88.4030293268909
+    },
+    {
+      "block": 4,
+      "remaining": [
+        4,
+        5
+      ],
+      "streak": [
+        2,
+        1,
+        0,
+        0,
+        3,
+        3,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 3,
+      "context": "balanced",
+      "action": 4,
+      "value": 86.69385937751403
+    },
+    {
+      "block": 4,
+      "remaining": [
+        4,
+        5
+      ],
+      "streak": [
+        2,
+        1,
+        0,
+        0,
+        3,
+        3,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 3,
+      "context": "playmaking",
+      "action": 4,
+      "value": 87.49873456236952
+    },
+    {
+      "block": 4,
+      "remaining": [
+        4,
+        5
+      ],
+      "streak": [
+        2,
+        1,
+        0,
+        0,
+        3,
+        3,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 3,
+      "context": "rebounding",
+      "action": 4,
+      "value": 88.08354559108741
+    },
+    {
+      "block": 5,
+      "remaining": [
+        5
+      ],
+      "streak": [
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 4,
+      "context": "balanced",
+      "action": 5,
+      "value": 77.44593473800387
+    },
+    {
+      "block": 5,
+      "remaining": [
+        5
+      ],
+      "streak": [
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 4,
+      "context": "playmaking",
+      "action": 5,
+      "value": 78.28275424066507
+    },
+    {
+      "block": 5,
+      "remaining": [
+        5
+      ],
+      "streak": [
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 4,
+      "context": "rebounding",
+      "action": 5,
+      "value": 78.95029046073024
+    },
+    {
+      "block": 5,
+      "remaining": [
+        5
+      ],
+      "streak": [
+        3,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 4,
+      "context": "balanced",
+      "action": 5,
+      "value": 77.44593473800387
+    },
+    {
+      "block": 5,
+      "remaining": [
+        5
+      ],
+      "streak": [
+        3,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 4,
+      "context": "playmaking",
+      "action": 5,
+      "value": 78.28275424066507
+    },
+    {
+      "block": 5,
+      "remaining": [
+        5
+      ],
+      "streak": [
+        3,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 4,
+      "context": "rebounding",
+      "action": 5,
+      "value": 78.95029046073024
+    },
+    {
+      "block": 6,
+      "remaining": [
+        6,
+        7,
+        8
+      ],
+      "streak": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 5,
+      "context": "balanced",
+      "action": 6,
+      "value": 67.96036722817642
+    },
+    {
+      "block": 6,
+      "remaining": [
+        6,
+        7,
+        8
+      ],
+      "streak": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 5,
+      "context": "playmaking",
+      "action": 6,
+      "value": 68.98526725440846
+    },
+    {
+      "block": 6,
+      "remaining": [
+        6,
+        7,
+        8
+      ],
+      "streak": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 5,
+      "context": "rebounding",
+      "action": 6,
+      "value": 69.51785691705065
+    },
+    {
+      "block": 7,
+      "remaining": [
+        7,
+        8
+      ],
+      "streak": [
+        1,
+        2,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 6,
+      "context": "balanced",
+      "action": 7,
+      "value": 55.039874527282656
+    },
+    {
+      "block": 7,
+      "remaining": [
+        7,
+        8
+      ],
+      "streak": [
+        1,
+        2,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 6,
+      "context": "playmaking",
+      "action": 7,
+      "value": 55.95344058355106
+    },
+    {
+      "block": 7,
+      "remaining": [
+        7,
+        8
+      ],
+      "streak": [
+        1,
+        2,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 6,
+      "context": "rebounding",
+      "action": 7,
+      "value": 56.47807572082465
+    },
+    {
+      "block": 8,
+      "remaining": [
+        8
+      ],
+      "streak": [
+        2,
+        3,
+        2,
+        0,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 7,
+      "context": "balanced",
+      "action": 8,
+      "value": 42.93276728004414
+    },
+    {
+      "block": 8,
+      "remaining": [
+        8
+      ],
+      "streak": [
+        2,
+        3,
+        2,
+        0,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 7,
+      "context": "playmaking",
+      "action": 8,
+      "value": 43.705201556072225
+    },
+    {
+      "block": 8,
+      "remaining": [
+        8
+      ],
+      "streak": [
+        2,
+        3,
+        2,
+        0,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 7,
+      "context": "rebounding",
+      "action": 8,
+      "value": 44.27960089673054
+    },
+    {
+      "block": 9,
+      "remaining": [
+        9,
+        10,
+        11
+      ],
+      "streak": [
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 8,
+      "context": "balanced",
+      "action": 9,
+      "value": 33.95954051777431
+    },
+    {
+      "block": 9,
+      "remaining": [
+        9,
+        10,
+        11
+      ],
+      "streak": [
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 8,
+      "context": "playmaking",
+      "action": 9,
+      "value": 34.753159613676885
+    },
+    {
+      "block": 9,
+      "remaining": [
+        9,
+        10,
+        11
+      ],
+      "streak": [
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "previous": 8,
+      "context": "rebounding",
+      "action": 9,
+      "value": 35.38990560899238
+    },
+    {
+      "block": 10,
+      "remaining": [
+        10,
+        11
+      ],
+      "streak": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 9,
+      "context": "balanced",
+      "action": 10,
+      "value": 24.43420493817223
+    },
+    {
+      "block": 10,
+      "remaining": [
+        10,
+        11
+      ],
+      "streak": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 9,
+      "context": "playmaking",
+      "action": 10,
+      "value": 25.335515480239774
+    },
+    {
+      "block": 10,
+      "remaining": [
+        10,
+        11
+      ],
+      "streak": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 9,
+      "context": "rebounding",
+      "action": 10,
+      "value": 25.77620124837663
+    },
+    {
+      "block": 11,
+      "remaining": [
+        11
+      ],
+      "streak": [
+        1,
+        2,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 10,
+      "context": "balanced",
+      "action": 11,
+      "value": 11.683253668695619
+    },
+    {
+      "block": 11,
+      "remaining": [
+        11
+      ],
+      "streak": [
+        1,
+        2,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 10,
+      "context": "playmaking",
+      "action": 11,
+      "value": 12.28784601455279
+    },
+    {
+      "block": 11,
+      "remaining": [
+        11
+      ],
+      "streak": [
+        1,
+        2,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "previous": 10,
+      "context": "rebounding",
+      "action": 11,
+      "value": 12.58272141556305
+    }
+  ]
+}

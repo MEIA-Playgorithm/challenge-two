@@ -7,7 +7,7 @@ To see file sizes, row counts, columns and missing values, open the notebook `no
 ## Sources at a glance
 
 | Folder | Contents | Period | Size |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `kaggle_eoinamoore_historical_nba` | Games, team and player statistics for each game, play-by-play, schedules | 1946 to November 2026 | 6.7 GB |
 | `kaggle_wyattowalsh_basketball` | Games, play-by-play, draft, players, teams, referees | 1946 to June 2023 | 2.2 GB |
 | `kaggle_nathanlauga_nba_games` | Games, player statistics for each game, daily standings | 2003 to December 2022 | 113 MB |
@@ -19,7 +19,7 @@ To see file sizes, row counts, columns and missing values, open the notebook `no
 ## Where to find what
 
 | You need | Start with | Other options |
-|---|---|---|
+| --- | --- | --- |
 | The result of each game | `eoinamoore/Games.csv` | `wyattowalsh/game.csv`, `nathanlauga/games.csv` |
 | Team statistics for each game | `eoinamoore/TeamStatistics.csv` | `wyattowalsh/game.csv` (both teams in one row) |
 | Player statistics for each game | `eoinamoore/PlayerStatistics.csv` | `nathanlauga/games_details.csv` |
@@ -40,7 +40,7 @@ To see file sizes, row counts, columns and missing values, open the notebook `no
 Most sources use the official NBA IDs for games, players and teams. You can join their files on these IDs. Each source gives the ID column a different name:
 
 | ID | eoinamoore | wyattowalsh | nathanlauga | sportsdataverse |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | Game | `gameId` | `game_id` | `GAME_ID` | `game_id` |
 | Player | `personId` | `person_id`, `player_id`, `player1_id` and similar | `PLAYER_ID` | `person_id` |
 | Team | `teamId`, `hometeamId`, `awayteamId` | `team_id`, `team_id_home`, `team_id_away` | `TEAM_ID`, `HOME_TEAM_ID` | `team_id` |
@@ -55,7 +55,7 @@ Start with this source. It has the most data and runs up to the current season.
 It covers the regular season, playoffs, preseason, play-in tournament, NBA Cup and All-Star games. The `gameType` column tells you which.
 
 | File | One row is | Rows | Period |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `Games.csv` | a game (result, arena, attendance, referees) | 73,507 | 1946 to 2026 |
 | `TeamStatistics.csv` | a team in a game (basic statistics) | 147,016 | 1946 to 2026 |
 | `TeamStatisticsExtended.csv` | a team in a game (104 columns, including advanced statistics) | 80,180 | 1996 to 2026 |
@@ -72,7 +72,7 @@ This source is a historical NBA database, with one table in each file. It ends w
 We merged its CSV and SQLite copies into one set of files. The [README](../README.md) explains how.
 
 | File | One row is | Rows | Period |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `game.csv` | a game, with statistics for both teams | 65,698 | 1946 to 2023 |
 | `game_summary.csv` | a game (status, TV broadcaster) | 58,070 | 1946 to 2023 |
 | `game_info.csv` | a game (attendance, length) | 58,013 | 1946 to 2023 |
@@ -94,7 +94,7 @@ We merged its CSV and SQLite copies into one set of files. The [README](../READM
 This source is smaller and simpler. It covers 2003 to 2022.
 
 | File | One row is | Rows | Period |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `games.csv` | a game (points, shooting percentages, whether the home team won) | 26,651 | 2003 to 2022 |
 | `games_details.csv` | a player in a game | 668,628 | 2003 to 2022 |
 | `ranking.csv` | a team on a given day (wins, losses, winning percentage) | 210,342 | 2003 to 2022 |
@@ -117,7 +117,7 @@ The main columns are `game_date`, `team`, `report_player_name`, `current_status`
 These files hold ready-made season summaries, with three files for each season from 2022-23 to 2026-27. The 2026-27 season is still in progress.
 
 | File | One row is | Rows per season |
-|---|---|---|
+| --- | --- | --- |
 | `<season>-team-game-results.csv` | a team in a game, with estimated offensive and defensive ratings | 2,460 |
 | `<season>-player-season-totals.csv` | a player in a season (totals, averages, true shooting percentage, usage rate) | About 460 to 580 |
 | `<season>-team-standings.csv` | a team in a season (wins, net rating, pace, strength of schedule) | 30 |

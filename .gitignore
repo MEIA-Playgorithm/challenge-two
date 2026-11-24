@@ -1,8 +1,16 @@
 # Data (large, built locally)
 data/raw/
 data/csv/
+data/processed/
+data/prepared/
+data/prediction_input/
+reports/**/model.joblib
+reports/**/game_features.csv
 
 __pycache__/
 *.pyc
 .venv/
 .ipynb_checkpoints/
+
+# Element 3 fitted estimators
+reports/performance/*_model.joblib
