@@ -1,0 +1,18 @@
+.header {
+    background-color: var(--app-header-background);
+    backdrop-filter: var(--app-header-blur);
+    border-bottom: 1px solid var(--app-mint-border);
+}
+
+.breadcrumbs {
+    flex-wrap: nowrap;
+    min-width: 0;
+}
+
+.main {
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}
