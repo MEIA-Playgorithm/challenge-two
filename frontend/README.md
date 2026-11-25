@@ -1,6 +1,6 @@
 # Frontend
 
-The frontend is a single-page app for the Playgorithm coach management system. We build it with React, Vite, [Mantine](https://mantine.dev) and `react-router`. Mantine is open source (MIT licence). The Vite setup, `config.json` and the `/health` plugin follow challenge-one.
+The frontend is a single-page app for the Playgorithm coach management system. We build it with React, Vite, [Mantine](https://mantine.dev) and `react-router`. Mantine is open source (MIT licence). The Vite setup and the `/health` plugin follow challenge-one.
 
 ## Run with Docker
 
@@ -24,24 +24,28 @@ The server reloads the page when you change a file. `npm run dev` does the same.
 
 ## Configure the frontend
 
-The backend address lives in `public/config.json`. The frontend reads this file when it starts:
+The backend address comes from the Vite variable `VITE_API_URL`. The default is `http://localhost:8000`. The app reads it in `src/config/env.ts`.
 
-```json
-{
-  "apiUrl": "http://localhost:8000"
-}
-```
+To change the address on your computer:
 
-Docker copies the file into the image. After you edit it, rebuild with `docker compose up -d --build frontend`.
+1. Go to the folder: `cd frontend`
+2. Copy the example file: `cp .env.example .env` (on Windows PowerShell: `Copy-Item .env.example .env`)
+3. Edit `VITE_API_URL` in `.env`.
+
+Vite reads the variable at build time. After you change it, restart the development server or run `npm run build` again.
+
+In Docker, `VITE_API_URL` is a build argument. Set it in `docker-compose.yaml` under `frontend.build.args`, then rebuild with `docker compose up -d --build frontend`.
+
+Do not commit `.env`. The `.env.example` file is safe to commit.
 
 ## Code organisation
 
 ```
 src/
-  main.tsx              loads config.json, then renders App
+  main.tsx              renders App
   app/App.tsx           MantineProvider and the router
   theme/theme.ts        colours, design tokens and component defaults
-  config/config.ts      loads config.json
+  config/env.ts         reads VITE_API_URL, the backend address
   config/navigation.ts  the single list of pages
   api/                  backend calls; routes.ts lists every backend route
   hooks/                logic, for example useBackendHealth
@@ -71,3 +75,4 @@ Rules for the code:
 - To add a page, create `pages/<Name>Page/<Name>Page.tsx`, add one entry to `config/navigation.ts` and add its path and element to the `elements` object in `app/App.tsx`. TypeScript reports an error if a page has no element. Do not add a `Route`, because `App.tsx` builds the routes from `pages`.
 - Draw in components and put the logic in hooks.
 - Send every HTTP call through `api/`, and write every route in `api/routes.ts`.
+- Read the backend address from `config/env.ts` (`VITE_API_URL`). Never hard-code a URL.
