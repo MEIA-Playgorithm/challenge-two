@@ -1,0 +1,9 @@
+.heroTitle {
+    font-size: var(--app-hero-title-size-base);
+}
+
+@media (min-width: 48em) {
+    .heroTitle {
+        font-size: var(--app-hero-title-size-sm);
+    }
+}

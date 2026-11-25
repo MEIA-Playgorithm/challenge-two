@@ -14,3 +14,15 @@ __pycache__/
 
 # Element 3 fitted estimators
 reports/performance/*_model.joblib
+
+# Web app
+backend/.ruff_cache/
+backend/.pytest_cache/
+frontend/node_modules/
+frontend/dist/
+*.tsbuildinfo
+
+# Secrets
+.env
+.env.*
+!.env.example
