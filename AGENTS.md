@@ -96,31 +96,33 @@ api/routes  →  services  →  repositories  →  domain
 | Services | `src/services/` | Hold the business rules, predictions and decisions. Never import FastAPI. |
 | Repositories | `src/repositories/` | Read and write data: CSV (comma-separated values) files, trained models. Return domain objects. |
 | Domain | `src/domain/` | Frozen dataclasses. Import nothing from the other layers. |
-| Core | `src/core/` | Settings, read from environment variables. Every layer may use it. |
+| Core | `src/core/` | Settings, read from environment variables, including `APP_HOST` and `APP_PORT`. They can come from `backend/.env` (copy `backend/.env.example`). Every layer may use it. |
+| Composition root | `src/app.py` | Builds the app and every object by hand in `create_app(settings)`. Creates no app instance. |
+| Entry point | `src/main.py` | Creates the one app instance with `create_app(settings)` and starts the server. Uses the host and port from the settings. Passes the `app` object to uvicorn, or `"main:app"` with `--dev` so uvicorn can reload. Docker runs it with `python src/main.py`. Holds no wiring. |
 
 Follow these rules:
 
 - **Keep the code plain.** Use no metaprogramming: no metaclasses, no `setattr` or `getattr` tricks, no dynamic imports, no monkey patching and no clever decorators.
-- **Wire by hand.** Pass every dependency through the constructor. `src/main.py` creates every object, so the whole wiring sits in one file. Do not use FastAPI `Depends` for wiring.
+- **Wire by hand.** Pass every dependency through the constructor. `src/app.py` creates every object in `create_app(settings)`, so the whole wiring sits in that function. `src/main.py` calls it once to create the one app instance. Keep `src/main.py` as the command-line entry point only. Do not use FastAPI `Depends` for wiring.
 - **Register routes explicitly.** Build each router in a `build_*_router(service)` function and call `router.add_api_route(...)`.
 - **Convert with plain functions.** Turn domain objects into schemas with functions such as `to_health_response(...)`.
 - **Import from the layer packages.** `src/` is on the Python path, so write `from services.health_service import HealthService`. Never write `from src.`.
 - **Respect the ruff rules.** `backend/pyproject.toml` holds a strict rule set. Fix the code, not the config. Add an ignore only when the user agrees.
 - **Pin dependencies.** Pin each new runtime dependency with an exact version (`==`). For dev tools, follow the pattern in `pyproject.toml`. Commit `uv.lock`.
-- **Test each layer.** Put tests in `backend/tests/`. Build the app with `create_app(settings)`, not the module-level `app`.
+- **Test each layer.** Put tests in `backend/tests/`. Import `create_app` from `app` and build the app with `create_app(settings)`, not the `app` instance in `main`.
 
 ## Write frontend code
 
-The frontend uses React, Vite, [Mantine](https://mantine.dev) (`@mantine/core` and `@mantine/hooks`) and `react-router`. Mantine is open source (MIT licence). The build and runtime setup (Vite, `config.json` and the `/health` plugin) follows the team's challenge-one project.
+The frontend uses React, Vite, [Mantine](https://mantine.dev) (`@mantine/core` and `@mantine/hooks`) and `react-router`. Mantine is open source (MIT licence). The build and runtime setup (Vite and the `/health` plugin) follows the team's challenge-one project.
 
 Code tree under `frontend/src/`:
 
 | Path | What it holds |
 |---|---|
-| `main.tsx` | Loads `config.json`, then renders `App`. |
+| `main.tsx` | Renders `App`. |
 | `app/App.tsx` | `MantineProvider` and the router. Maps over `pages` to build the routes. Its `elements` object links each path to a page component. |
 | `theme/theme.ts` | The Mantine theme: colours, design tokens and component defaults. |
-| `config/config.ts` | Loads `config.json`. |
+| `config/env.ts` | Reads `VITE_API_URL`, the backend address. |
 | `config/navigation.ts` | The single list of pages. |
 | `api/` | Backend calls. `api/routes.ts` lists every backend route. |
 | `hooks/` | The logic, for example `useBackendHealth`. |
@@ -145,7 +147,7 @@ Follow these rules:
 - **Add a page in 3 steps.** Create `src/pages/<Name>Page/<Name>Page.tsx`. Add one entry to `src/config/navigation.ts`. Add its path and element to the `elements` object in `src/app/App.tsx`. TypeScript reports an error if a page has no element. Do not add a `Route`, because `App.tsx` builds the routes from `pages`. The landing page then shows a card for the new page.
 - **Separate drawing from logic.** Components draw. Hooks hold the logic. Put every hook in `src/hooks/`, for example `useBackendHealth.ts`.
 - **Send every HTTP call through `src/api/`.** Write every route in `src/api/routes.ts`.
-- **Read service addresses from `public/config.json`.** Never hard-code a URL.
+- **Read the backend address from `config/env.ts` (`VITE_API_URL`).** Never hard-code a URL. Copy `frontend/.env.example` to `frontend/.env` to change it. Vite reads it at build time.
 - **Keep TypeScript strict.** Use no `any`.
 
 ## Work with the data
@@ -159,7 +161,7 @@ Follow these rules:
 - **Branches:** `development` is the default branch, and `main` holds releases. Work on a `type/task` branch, for example `feature/coach-api`, and merge through a pull request. Read the [branch guide](.claude/skills/branch-naming/SKILL.md).
 - **Commits:** Commit only when the user asks. Write messages in English, in the NASA cFS format, for example `Fix #12, Add data overview notebook`. Make one commit per topic. Read the [commit guide](.claude/skills/commit/SKILL.md).
 - **Documentation:** Write README files and guides in plain English. Read the [documentation guide](.claude/skills/docs-style/SKILL.md).
-- **Secrets:** Never read or commit `.env` files or credentials.
+- **Secrets:** Never read or commit `.env` files or credentials. The `backend/.env.example` and `frontend/.env.example` files hold no secrets. You may read and commit them.
 
 ## Known issues
 
