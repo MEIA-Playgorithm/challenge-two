@@ -4,4 +4,6 @@ WORKDIR /app
 COPY . .
 RUN uv sync --locked --no-dev
 
-CMD [".venv/bin/uvicorn", "main:app", "--app-dir", "src", "--host", "0.0.0.0", "--port", "8000"]
+ENV APP_HOST=0.0.0.0
+
+CMD [".venv/bin/python", "src/main.py"]
